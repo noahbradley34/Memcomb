@@ -14,13 +14,6 @@ namespace Memcomb.Controllers
 
 			return View();
 		}
-
-
-
-
-
-
-
 		public ActionResult Index()
 		{
 			return View();
@@ -37,6 +30,10 @@ namespace Memcomb.Controllers
 		{
 			ViewBag.Message = "Your contact page.";
 
+			return View();
+		}
+		public new ActionResult Profile() {
+			ViewBag.Message = "Profile page.";
 			return View();
 		}
 	}
