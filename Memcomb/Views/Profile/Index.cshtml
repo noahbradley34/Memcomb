@@ -19,8 +19,10 @@
     <meta name="viewport" content="width=device-width" />
     <title>User Profile</title>
     <h2>User's Name</h2>
-    <input type="image" src="" alt="Submit" width="48" height="48"/>
-    <template>I am a user and this is my bio</template>
+    <a href='@Url.Action("MyAction", "MyController")'>
+    <img src='@Url.Content("~/Content/Image/facebookdefaultprofile.jpg")'/>
+    </a>
+    <p>I am a user and this is my bio</p>
 </head>
 <body>
     <div>
