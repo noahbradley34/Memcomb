@@ -32,9 +32,5 @@ namespace Memcomb.Controllers
 
 			return View();
 		}
-		public new ActionResult Profile() {
-			ViewBag.Message = "Profile page.";
-			return View();
-		}
 	}
 }
