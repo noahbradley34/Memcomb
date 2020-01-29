@@ -59,7 +59,7 @@ namespace Memcomb.Controllers
 
                     //Send confirmation email to user
                     SendVerificationLinkEmail(user.EmailID, user.ActivationCode.ToString());
-                    message = "Registration was successful. Check your email for verification link" +
+                    message = "Registration was successful. Check your email for verification link " +
                         "at your email: " + user.EmailID;
                     Status = true;
                 }
