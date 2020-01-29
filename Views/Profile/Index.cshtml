@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Profile template";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>User's Profile</title>
+    <h1>User's Profile</h1>
+    @using (Html.BeginForm("UploadFile", "Upload", FormMethod.Post))
+    {
+            @Html.TextBox("file", "", new { type="file"})
+        <button type="submit" class="button" style="width:auto">
+            <img src="~/Content/Images/facebookdefaultprofile.jpg" />
+        </button>
+        @ViewBag.Message
+       
+    }
+    <p>This is the user's bio</p>
+</head>
+<body>
+    <div>
+    </div>
+</body>
+</html>
