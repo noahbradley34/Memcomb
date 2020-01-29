@@ -8,12 +8,6 @@ namespace Memcomb.Controllers
 {
 	public class HomeController : Controller
 	{
-
-		public ActionResult Submit()
-		{
-
-			return View();
-		}
 		public ActionResult Index()
 		{
 			return View();
