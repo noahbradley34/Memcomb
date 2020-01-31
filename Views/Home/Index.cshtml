@@ -49,12 +49,14 @@
             </form>-->
             <input class="inputFields" type="text" name="FirstName" placeholder="email@example.com"><br>
             <input class="inputFields" type="text" name="LastName" placeholder="password"><br>
-            <input class="logInBtn" type="submit" value="Log In">
+            <div>
+                <a href=@Url.Action("Index","HomePage") class="logInBtn">
+                    Log In
+                </a>
+            </div>
             <div>
                 <a href="@Url.Action("Create", "SignUps")">
                     Sign Up
                 </a>
             </div>
-            -->
-
         </div>
