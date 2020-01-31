@@ -26,7 +26,6 @@ C:\Users\Jzhan\source\repos\Memcomb\bin\Microsoft.CodeDom.Providers.DotNetCompil
 C:\Users\Jzhan\source\repos\Memcomb\obj\Debug\Memcomb.csproj.CopyComplete
 C:\Users\Jzhan\source\repos\Memcomb\obj\Debug\Memcomb.dll
 C:\Users\Jzhan\source\repos\Memcomb\obj\Debug\Memcomb.pdb
-C:\Users\Jzhan\source\repos\Memcomb\obj\Debug\Memcomb.csprojAssemblyReference.cache
 C:\Users\Jzhan\source\repos\Memcomb\bin\roslyn\csc.exe
 C:\Users\Jzhan\source\repos\Memcomb\bin\roslyn\csc.exe.config
 C:\Users\Jzhan\source\repos\Memcomb\bin\roslyn\csc.rsp
@@ -76,3 +75,4 @@ C:\Users\Jzhan\source\repos\Memcomb\bin\roslyn\vbc.exe.config
 C:\Users\Jzhan\source\repos\Memcomb\bin\roslyn\vbc.rsp
 C:\Users\Jzhan\source\repos\Memcomb\bin\roslyn\VBCSCompiler.exe
 C:\Users\Jzhan\source\repos\Memcomb\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Jzhan\source\repos\Memcomb\obj\Debug\Memcomb.csprojAssemblyReference.cache

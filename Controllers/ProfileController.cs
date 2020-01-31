@@ -14,30 +14,6 @@ namespace Memcomb.Controllers
         {
             return View();
         }
-        [HttpGet]
-        public ActionResult UploadFile()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult UploadFile(HttpPostedFileBase file)
-        {
-            try
-            {
-                if(file.ContentLength > 0)
-                {
-                    string _FileName = Path.GetFileName(file.FileName);
-                    string _path = Path.Combine(Server.MapPath("~/UploadedFiles"), _FileName);
-                    file.SaveAs(_path);
-                }
-                return View();
-            }
-            catch
-            {
-                ViewBag.Message("Invalid file!");
-                return View();
-            }
-        }
         // GET: Profile/Details/5
         public ActionResult Details(int id)
         {
