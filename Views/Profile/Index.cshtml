@@ -1,20 +1,43 @@
 ﻿@{
-    Layout = null;
+    ViewBag.Title = "Profile template";
 }
-
+    <link href="@Url.Content("~/Content/Profile.css") rel="stylesheet" type="text/css" />
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>User's Profile</title>
-    <h1>User's Name</h1>
-    <input type="image" src="~/Content/Images/facebookdefaultprofile.jpg" alt="Submit" width="100" height="100" />
-    <p>This is User's bio</p>
-</head>
-<body>
+    <title>User's Username</title>
     <div>
-    
+        <img src="@Url.Content("~/Content/Images/facebookdefaultprofile.jpg")" />
     </div>
-</body>
+    <h1>User's Name</h1>
+    <td>___________________________________________________</td>
+    <table>
+        <tr>
+            <td>
+               | Number of followers
+            </td>
+            <td>
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+            </td>
+            <td>
+                Number of Memories
+            </td>
+            <td>
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+            </td>
+            <td>
+                This is my bio |
+            </td>
+        </tr>
+    </table>
+    <td>___________________________________________________</td>
+    <br />    
+    <button>Edit Profile</button>
+    </head>
+    <body>
+        <div>
+            <button>Upload</button>
+        </div>
+    </body>
 </html>
