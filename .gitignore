@@ -343,3 +343,4 @@ Memcomb.csproj
 .vs/Memcomb/v16/Server/sqlite3/storage.ide
 *.lock
 *.ide
+.vs/Memcomb/config/applicationhost.config
