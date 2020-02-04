@@ -33,11 +33,12 @@
     </table>
     <td>___________________________________________________</td>
     <br />    
-    <button>Edit Profile</button>
     </head>
-    <body>
-        <div>
-            <button>Upload</button>
-        </div>
-    </body>
+<body>
+    @using (Html.BeginForm("Upload", "Profile", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <input type="file" name="file" />
+        <input type="submit" name="Submit" value="Upload" />
+    }
+</body>
 </html>
