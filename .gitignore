@@ -344,3 +344,6 @@ Memcomb.csproj
 *.lock
 *.ide
 .vs/Memcomb/config/applicationhost.config
+*.config
+obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+bin/WebGrease.dll
