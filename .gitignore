@@ -344,3 +344,7 @@ Memcomb.csproj
 *.lock
 *.ide
 .vs/Memcomb/config/applicationhost.config
+.vs/slnx.sqlite
+.vs/Memcomb/config/applicationhost.config
+.vs/slnx.sqlite
+.vs/VSWorkspaceState.json
