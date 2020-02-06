@@ -346,3 +346,4 @@ Memcomb.csproj
 .vs/Memcomb/config/applicationhost.config
 .vs/slnx.sqlite
 .vs/Memcomb/config/applicationhost.config
+*.config

@@ -2,17 +2,47 @@
 	ViewBag.Title = "Profile";
 }
 <link href="@Url.Content("~/Content/Profile.css")" rel="stylesheet" type="text/css" />
+<<<<<<< HEAD
+=======
 
+>>>>>>> master
+<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			@Html.ActionLink("Memcomb", "Index", "LogInPage", new { area = "" }, new { @class = "navbar-brand" })
+		</div>
+		<div class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<li>@Html.ActionLink("Home", "Index", "LogInPage")</li>
+				<li>@Html.ActionLink("Notifications", "About", "LogInPage")</li>
+				<li>@Html.ActionLink("Messages", "Index", "LogInPage")</li>
+				<li>@Html.ActionLink("Profile", "Index", "Profile")</li>
+				<li>@Html.ActionLink("Settings", "Index", "LogInPage")</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 <head>
 	<div class="head">
+
 		<div class="spaceBetween">
 			<img src="@Url.Content("~/Content/Images/facebookdefaultprofile.jpg")" />
-			Back ground Image
+			<input type="file" onchange="loadImageFile(this)"/>
 			<div>
 				<a href="@Url.Action("Index","HomePage")" class="editProfileBtn">
 					Edit Profile
 				</a>
 			</div>
+			@Scripts.Render("~/bundles/backgroundupload")
 		</div>
 		<diV>
 			<h1>User Name</h1>
