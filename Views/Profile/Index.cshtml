@@ -16,6 +16,21 @@
         }
     }
  }
+@{ 
+    WebImage Profilephoto = null;
+    var ProfileFileName = "";
+    var ProfilePath = "";
+    if (IsPost)
+    {
+        photo = WebImage.GetImageFromRequest();
+        if (Profilephoto != null)
+        {
+            ProfileFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(photo.FileName);
+            ProfilePath = @"Images\" + ProfileFileName;
+            Profilephoto.Save(@"~\" + ProfilePath);
+        }
+    }
+}
 <link href="@Url.Content("~/Content/Profile.css")" rel="stylesheet" type="text/css" />
 <div class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container">
@@ -33,7 +48,7 @@
 				<li>@Html.ActionLink("Notifications", "About", "LogInPage")</li>
 				<li>@Html.ActionLink("Messages", "Index", "LogInPage")</li>
 				<li>@Html.ActionLink("Profile", "Index", "Profile")</li>
-				<li>@Html.ActionLink("Settings", "Index", "LogInPage")</li>
+				<li>@Html.ActionLink("Settings", "Index", "Settings")</li>
 			</ul>
 		</div>
 	</div>
@@ -41,17 +56,27 @@
 <head>
 	<div class="head">
 		<div class="banner">
-		<img src="@Url.Content("~/Content/Images/honeybee.jpg")"/>
 		@if (imagePath != "")
 		{
-			<div>
-				<img src="@imagePath">
+			<div class="background-image">
+				<img src="@imagePath" />
 			</div>
 			<br />
-		}
+        }
+        else
+        {
+			<div class="background-image">Upload background image</div>
+        }
 		</div>
 		<div class="spaceBetween">
+			@if (ProfilePath != "")
+            {
+				<img src="@ProfilePath" />
+            }
+            else
+            {
 			<img src="@Url.Content("~/Content/Images/facebookdefaultprofile.jpg")" />
+            }
 			<!--<input type="file" onchange="loadImageFile(this)"/>-->
 			<form action="" method="post" enctype="multipart/form-data">
 				<input type="file" name="Image" />
