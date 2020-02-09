@@ -1,9 +1,21 @@
-﻿body {
+﻿.body {
 	text-align: center; /*Centers all input fields, buttons, and text on screen*/
 	display: flex;
 	justify-content: center;
-	background-color: #333300;
+	/*background-color: #333300;
+		background-color: #ff8c00;
+	
+	background-color: #ff6000;*/
+	background: linear-gradient( to right, #312f17 0%, #312f17 12%, #eec33d 13%, #eec33e 87%, #312f17 88%, #312f17 100% );
+	margin: 0;
+}
 
+.head {
+	text-align: center; /*Centers all input fields, buttons, and text on screen*/
+	display: flex;
+	justify-content: center;
+	/*background-color: #333300;*/
+	background-color: #FFFFFF;
 }
 
 .img {
@@ -56,5 +68,5 @@
 	padding: 0 3.5rem 0 3.5rem;
 	color: #ffffff;
 	/*text-shadow: .1vw 0vw .25vw #ffd8d8, .2vw 0vw .25vw #ffd8d8, .4vw 0vw .25vw #ffd8d8, .1vw 0vw 0vw #f25757, .2vw 0vw 0vw #f25757, .4vw 0vw 0vw #f25757, .1vw 0vw .1vw #f25757, .2vw 0vw .1vw #f25757, .4vw 0vw .1vw #f25757, .1vw 0vw 2vw #f25757, .2vw 0vw 2vw #f25757, .4vw 0vw 2vw #f25757, .1vw 0vw 1vw #e50b0b, .2vw 0vw 1vw #e50b0b, .4vw 0vw 5vw #e50b0b, .1vw 0vw 5vw #e50b0b, .2vw 0vw 20vw #e50b0b, .4vw 0vw 10vw #e50b0b, .1vw 0vw 10vw #e50b0b, .2vw 0vw 30vw #e50b0b, .4vw 0vw 10vw #e50b0b;*/
-	text-shadow: .1vw 0vw .25vw #ffffff, .2vw 0vw .25vw #ffffff, .4vw 0vw .25vw #ffffff, .1vw 0vw 0vw #FFFF3E, .2vw 0vw 0vw #FFFF3E, .4vw 0vw 0vw #FFFF3E, .1vw 0vw .1vw #FFFF3E, .2vw 0vw .1vw #FFFF3E, .4vw 0vw .1vw #FFFF3E, .1vw 0vw 2vw #FFFF3E, .2vw 0vw 2vw #FFFF3E/*, .4vw 0vw 2vw #FFFF3E, .1vw 0vw 1vw #DFE911, .2vw 0vw 1vw #DFE911, .4vw 0vw 5vw #DFE911, .1vw 0vw 5vw #DFE911, .2vw 0vw 20vw #F973A4, .4vw 0vw 10vw #F973A4, .1vw 0vw 10vw #F973A4, .2vw 0vw 30vw #F973A4, .4vw 0vw 10vw #F973A4*/;
+	text-shadow: .1vw 0vw .25vw #ffffff, .2vw 0vw .25vw #ffffff, .4vw 0vw .25vw #ffffff, .1vw 0vw 0vw #FFFF3E, .2vw 0vw 0vw #FFFF3E, .4vw 0vw 0vw #FFFF3E, .1vw 0vw .1vw #FFFF3E, .2vw 0vw .1vw #FFFF3E, .4vw 0vw .1vw #FFFF3E, .1vw 0vw 2vw #312f17, .2vw 0vw 2vw #312f17 /*, .4vw 0vw 2vw #FFFF3E, .1vw 0vw 1vw #DFE911, .2vw 0vw 1vw #DFE911, .4vw 0vw 5vw #DFE911, .1vw 0vw 5vw #DFE911, .2vw 0vw 20vw #F973A4, .4vw 0vw 10vw #F973A4, .1vw 0vw 10vw #F973A4, .2vw 0vw 30vw #F973A4, .4vw 0vw 10vw #F973A4*/;
 }
