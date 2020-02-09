@@ -1,0 +1,30 @@
+﻿body {
+    display: flex;
+    background-color: #333300;
+    color: #ffffff;
+}
+
+.head {
+    font-size: 10pt;
+    font-weight: bold;
+    text-align: left;
+    color: #ffffff;
+}
+
+.switchLine {
+    clear: both;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.left {
+    display: inline-block;
+    width: 160px;
+    text-align: right;
+    margin-right: 20px;
+}
+
+.right {
+    display: inline-block;
+    text-align: left;
+}
