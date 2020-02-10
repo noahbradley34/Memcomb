@@ -145,6 +145,7 @@
     <Content Include="fonts\OcrA.ttf" />
     <Content Include="fonts\OCRA Medium.ttf" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\backgroundupload.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />

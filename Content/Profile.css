@@ -13,7 +13,35 @@ body {
     text-align: left;
     color: #ffffff;
 }
-
+.posts{
+    width: auto;
+    height: 300px;
+    color:darkgoldenrod;
+    align-content:center;
+}
+.banner{
+    width: 100%;
+    height: 200px;
+}
+.background-image{
+    width: 100%;
+    height: 200px;
+    color: greenyellow;
+    text-align: center;
+    border: solid;
+    border-color: yellow;
+}
+.image-resize{
+    width: auto;
+    height: auto;
+}
+.text-box{
+    width: 100%;
+    height: 250px;
+}
+.post-btn{
+    color: yellowgreen;
+}
 .spaceBetween{
     display: flex;
     justify-content: space-between;
