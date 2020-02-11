@@ -1,7 +1,6 @@
 ﻿body {
-    display: flex;
-    background-color: #333300;
-    color: #ffffff;
+    background: linear-gradient(to right, #312f17 0%, #312f17 12%, #eec33d 13%, #eec33e 87%, #312f17 88%, #312f17 100% );
+    margin-left: 130px;
 }
 
 .head {
