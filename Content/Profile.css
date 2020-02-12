@@ -1,10 +1,8 @@
 ﻿
-body {
-    text-align: center; /*Centers all input fields, buttons, and text on screen*/
-    display: flex;
+.body {
+    background: linear-gradient(to right, #312f17 0%, #312f17 12%, #eec33d 13%, #eec33e 87%, #312f17 88%, #312f17 100% );
     justify-content: center;
-    background-color: #333300;
-    color: #ffffff;
+    margin-left: 110px;
 }
 
 .head {
@@ -20,7 +18,7 @@ body {
     align-content:center;
 }
 .banner{
-    width: 100%;
+    width: 88%;
     height: 200px;
 }
 .background-image{
@@ -30,10 +28,6 @@ body {
     text-align: center;
     border: solid;
     border-color: yellow;
-}
-.image-resize{
-    width: auto;
-    height: auto;
 }
 .text-box{
     width: 100%;
@@ -65,7 +59,9 @@ body {
     transition-duration: 0.4s;
     cursor: pointer;
 }
-
+.profileBtn {
+    margin-right: 110px;
+}
 .editProfileBtn:hover {
     background-color: #FFFF3E;
     color: #000000;
