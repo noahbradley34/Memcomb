@@ -20,7 +20,7 @@ namespace Memcomb.Models
         public string Email_ID { get; set; }
         public string Password { get; set; }
         public Nullable<System.DateTime> Date_Of_Birth { get; set; }
-        public Nullable<int> Phone_Number { get; set; }
+        public string Phone_Number { get; set; }
         public string Profile_Picture { get; set; }
         public string Biography { get; set; }
         public bool Is_Verified { get; set; }
