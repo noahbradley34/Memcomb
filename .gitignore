@@ -344,13 +344,9 @@ Memcomb.csproj
 *.ide
 .vs/Memcomb/config/applicationhost.config
 .vs/Memcomb/config/applicationhost.config
-*.config
 obj/Debug/Memcomb.dll
 obj/Debug/Memcomb.pdb
 .vs/Memcomb/v16/Server/sqlite3/db.lock
-*.cs
-*.cs
-*.config
 Pictures/c49c9274-4c92-46a7-a36e-d1aa0f99630a_hex.JPG
 .vs/slnx.sqlite
 .vs/VSWorkspaceState.json
