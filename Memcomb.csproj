@@ -217,6 +217,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\LogInPage\About.cshtml" />
     <Content Include="Views\LogInPage\Contact.cshtml" />
+		<Content Include="Views\LogInPage\Index.cshtml" />
     <Content Include="Views\HomePage\Index.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\SignUpPage\Index.cshtml" />
