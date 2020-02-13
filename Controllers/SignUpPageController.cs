@@ -43,13 +43,15 @@ namespace Memcomb.Controllers
                 #region Generate Activation Code
                 user.ActivationCode = Guid.NewGuid();
                 #endregion
+                */
+
 
                 #region Password Hashing
-                user.Password = Encrypt.Hash(user.Password);
-                user.ConfirmPassword = Encrypt.Hash(user.ConfirmPassword);
+                //user.Password = Encrypt.Hash(user.Password);
+                //user.ConfirmPassword = Encrypt.Hash(user.ConfirmPassword);
                 #endregion
 
-                user.IsEmailVerified = false;*/
+               // user.IsEmailVerified = false;
 
                 
                 #region Save to database
@@ -110,7 +112,7 @@ namespace Memcomb.Controllers
             return View();
         }
 
-        /* Move to login controller
+        /*Move to login controller
         //Login POST
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -125,7 +127,7 @@ namespace Memcomb.Controllers
                     if (string.Compare(Encrypt.Hash(login.Password), v.Password) == 0)
                     {
                         int timeout = login.RememberMe ? 525600 : 20;
-                        var ticket = new FormsAuthenticationTicket(login.EmailID, login.RememberMe, timeout);
+                        var ticket = new FormsAuthenticationTicket(login.Email_ID, login.RememberMe, timeout);
                         string encrypted = FormsAuthentication.Encrypt(ticket);
                         var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted);
                         cookie.Expires = DateTime.Now.AddMinutes(timeout);
