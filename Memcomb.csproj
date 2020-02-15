@@ -130,6 +130,7 @@
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\SignUpPageController.cs" />
+    <Compile Include="Encrypt.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -218,7 +219,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\LogInPage\About.cshtml" />
     <Content Include="Views\LogInPage\Contact.cshtml" />
-		<Content Include="Views\LogInPage\Index.cshtml" />
+    <Content Include="Views\LogInPage\Index.cshtml" />
     <Content Include="Views\HomePage\Index.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\SignUpPage\Index.cshtml" />

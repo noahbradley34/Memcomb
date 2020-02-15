@@ -29,6 +29,8 @@ namespace Memcomb.Controllers
             // Model Validation
             if (ModelState.IsValid)
             {
+                
+
                 // Email already registered
                 #region
                 var isRegistered = IsEmailRegistered(user.Email_ID);
@@ -61,10 +63,11 @@ namespace Memcomb.Controllers
                     dc.SaveChanges();
 
                     //Send confirmation email to user
-                    SendVerificationLinkEmail(user.Email_ID, user.User_ID.ToString());
+                    //SendVerificationLinkEmail(user.Email_ID, user.User_ID.ToString());
                     message = "Registration was successful. Check your email for verification link " +
                         "at your email: " + user.Email_ID;
                     Status = true;
+                    return View("~/Views/HomePage/Index.cshtml");
                 }
                 #endregion
             
@@ -179,6 +182,7 @@ namespace Memcomb.Controllers
             }
         }
 
+        /*
         [NonAction]
         public void SendVerificationLinkEmail(string emailID, string activationCode, string emailFor = "VerifyAccount")
         {
@@ -231,7 +235,7 @@ namespace Memcomb.Controllers
 
                 smtp.Send(message);
         }
-
+        */
         //Forgot password
 
         public ActionResult ForgotPassword()

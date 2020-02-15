@@ -8,7 +8,7 @@ namespace Memcomb.Models
 {
     public class UserLogin
     {
-        [Display(Name = "Email ID")]
+        [Display(Name = "Email")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Email ID required")]
         public string Email_ID { get; set; }
 
