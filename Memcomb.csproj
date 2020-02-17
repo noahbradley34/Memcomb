@@ -134,6 +134,24 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Memory.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Memory.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Memory.cs">
+      <DependentUpon>Memory.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Memory.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Memory.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Memory1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Memory.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\User.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -171,6 +189,16 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\LogInPageBackground.png" />
     <Content Include="Images\memcombLogo.png" />
+    <Content Include="Models\Memory.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Memory.edmx</DependentUpon>
+      <LastGenOutput>Memory.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Memory.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Memory.edmx</DependentUpon>
+      <LastGenOutput>Memory1.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\User.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>User.edmx</DependentUpon>
@@ -192,6 +220,13 @@
     </EntityDeploy>
     <Content Include="Models\User.edmx.diagram">
       <DependentUpon>User.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\Memory.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Memory.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Memory.edmx.diagram">
+      <DependentUpon>Memory.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\backgroundupload.js" />
