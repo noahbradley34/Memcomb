@@ -22,14 +22,17 @@ namespace Memcomb.Controllers
             return View();
         }
 
+     
+
         /*
+        [HttpPost]
         protected void FTPUpload(object sender, EventArgs e)
         {
             //FTP Server URL.
-            string ftp = "ftp://34.73.153.47";
+            string ftp = "ftp://34.73.153.47/files/";
 
             //FTP Folder name. Leave blank if you want to upload to root folder.
-            string ftpFolder = "Uploads/";
+            string ftpFolder = "C:/Users/17347/Desktop/Uploads";
 
             byte[] fileBytes = null;
 
