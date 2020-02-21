@@ -13,10 +13,10 @@ namespace Memcomb.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class memcombdbEntities1 : DbContext
+    public partial class memcombdbEntities : DbContext
     {
-        public memcombdbEntities1()
-            : base("name=memcombdbEntities1")
+        public memcombdbEntities()
+            : base("name=memcombdbEntities")
         {
         }
     
@@ -25,6 +25,9 @@ namespace Memcomb.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Following> Followings { get; set; }
+        public virtual DbSet<Fragment> Fragments { get; set; }
         public virtual DbSet<Memory> Memories { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

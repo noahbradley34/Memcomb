@@ -38,13 +38,7 @@
 }
 
 .inputFields {
-	width: 100%;
-	padding: 12px 20px;
-	margin: 8px 0;
-	display: inline-block;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	box-sizing: border-box;
+	max-width: 80%;
 }
 
 .createMemoryBtn {
@@ -73,9 +67,10 @@
 	box-sizing: border-box;
 }
 
+/*
 .form-control {
 	display: block;
-	width: 500px;
+	max-width: 500px;
 	height: 300px;
 	padding: 6px 12px;
 	font-size: 14px;
@@ -93,14 +88,14 @@
 	transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
 	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
-}
+}*/
 
 	@font-face {
 		font-family: neon;
 		src: url('../fonts/ocra.ttf') format('truetype');
 	}
 
-	.neon-text {
+.neon-text {
 	font-family: neon;
 	font-size: 10rem;
 	padding: 0 3.5rem 0 3.5rem;

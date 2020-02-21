@@ -20,8 +20,7 @@
 			<hr />
 			<div>
 				<div>
-					@Html.EditorFor(model => model.Memory_Description, new { htmlAttributes = new { @class = "form-control", required = true, placeholder = "Description" } })
-					@Html.ValidationMessageFor(model => model.Memory_Description, "", new { @class = "text-danger" })
+					@Html.EditorFor(model => model.Memory_Description, new { htmlAttributes = new { @class = "form-control inputFields", required = true, placeholder = "Description" } })
 				</div>
 			</div>
 			<span class="close">&times;</span>
