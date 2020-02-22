@@ -83,6 +83,13 @@ namespace Memcomb.Controllers
 
         }
 
+
+        //Login
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
+        }
         /*
         //Verify Email
         [HttpGet]
@@ -108,12 +115,6 @@ namespace Memcomb.Controllers
             return View();
         }*/
 
-        //Login
-        [HttpGet]
-        public ActionResult Login()
-        {
-            return View();
-        }
 
         /*Move to login controller
         //Login POST
@@ -136,7 +137,6 @@ namespace Memcomb.Controllers
                         cookie.Expires = DateTime.Now.AddMinutes(timeout);
                         cookie.HttpOnly = true;
                         Response.Cookies.Add(cookie);
-
                         if (Url.IsLocalUrl(ReturnUrl))
                         {
                             return Redirect(ReturnUrl);
@@ -156,7 +156,6 @@ namespace Memcomb.Controllers
                     message = "Invalid credential provided";
                 }
             }
-
             ViewBag.Message = message;
             return View();
         }*/
@@ -171,7 +170,6 @@ namespace Memcomb.Controllers
             return RedirectToAction("Login", "User");
         }
         */
-
         [NonAction]
         public bool IsEmailRegistered(string emailID)
         {
@@ -182,25 +180,22 @@ namespace Memcomb.Controllers
             }
         }
 
-        
+        //Forgot password
+        /*
+       
         [NonAction]
         public void SendVerificationLinkEmail(string emailID, string activationCode, string emailFor = "VerifyAccount")
         {
             var verifyUrl = "/User/" + emailFor + "/" + activationCode;
             var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyUrl);
-
             var fromEmail = new MailAddress("memcombemailsender@gmail.com");
             var toEmail = new MailAddress(emailID);
             var fromEmailPassword = "Lol123123";
-
             string subject = "";
             string body = "";
-
-
             if (emailFor == "VerifyAccount")
             {
                 subject = "Your account is successfully created";
-
                 body = "<br/><br/>You created an account and it was successful. " +
                     "Click the link to verify the account."
                     + "<br/><br/> <a href ='" + link + "'> " + link + " </a> ";
@@ -208,13 +203,9 @@ namespace Memcomb.Controllers
             else if (emailFor == "ResetPassword")
             {
                 subject = "Reset Password";
-
                 body = "Hello,<br/><br/>We have received your request to reset the account password associated with your Email Address." +
                     "Please click the link below to reset your password.<br/><br/><a href=" + link + ">Reset Password</a>";
             }
-
-
-
             var smtp = new SmtpClient
             {
                 Host = "smtp.gmail.com",
@@ -225,108 +216,21 @@ namespace Memcomb.Controllers
                 UseDefaultCredentials = false,
                 Credentials = new NetworkCredential("memcombemailsender@gmail.com", "Lol123123")
             };
-
             using (var message = new MailMessage(fromEmail, toEmail)
             {
                 Subject = subject,
                 Body = body,
                 IsBodyHtml = true
             })
-
                 smtp.Send(message);
         }
         
         //Forgot password
-
         public ActionResult ForgotPassword()
         {
             return View();
         }
 
-        /* Login Page
-        [HttpPost]
-        public ActionResult ForgotPassword(string EmailID)
-        {
-            //Verify Email ID
-            //Generate Reset password link
-            //Send Email
-            string message = "";
-            bool status = false;
 
-            using (memcombdbEntities dc = new memcombdbEntities())
-            {
-                var account = dc.Users.Where(a => a.Email_ID == EmailID).FirstOrDefault();
-                if (account != null)
-                {
-                    //Send email for password reset
-                    string resetCode = Guid.NewGuid().ToString();
-                    SendVerificationLinkEmail(account.Email_ID, resetCode, "ResetPassword");
-                    account.ResetPasswordCode = resetCode;
-
-                    dc.Configuration.ValidateOnSaveEnabled = false; //Avoids checking if the passwords match (confirm password from Model1
-                    dc.SaveChanges();
-                    message = "Reset password link has been sent to your Email Address";
-                }
-                else
-                {
-                    message = "Email not found";
-                }
-            }
-            ViewBag.Message = message;
-            return View();
-        }*/
-
-            /* Profile Page
-        public ActionResult ResetPassword(string id)
-        {
-            //Verify the reset password link
-            //Find account associated with the link
-            //redirect to reset password page
-            using (memcombdbEntities dc = new memcombdbEntities())
-            {
-                var user = dc.Users.Where(a => a.ResetPasswordCode == id).FirstOrDefault();
-                if (user != null)
-                {
-                    ResetPasswordModel model = new ResetPasswordModel();
-                    model.ResetCode = id;
-                    return View(model);
-                }
-                else
-                {
-                    return HttpNotFound();
-                }
-            }
-        }*/
-
-        /*
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult ResetPassword(ResetPasswordModel model)
-        {
-            var message = "";
-            if (ModelState.IsValid)
-            {
-                using (memcombdbEntities dc = new memcombdbEntities())
-                {
-                    var user = dc.Users.Where(a => a.ResetPasswordCode == model.ResetCode).FirstOrDefault();
-                    if (user != null)
-                    {
-                        user.Password = Encrypt.Hash(model.NewPassword);
-                        user.ResetPasswordCode = "";
-
-                        dc.Configuration.ValidateOnSaveEnabled = false;
-                        dc.SaveChanges();
-                        message = "New password updated successfully";
-                    }
-                }
-            }
-            else
-            {
-                message = "Something invalid";
-            }
-
-            ViewBag.Message = message;
-            return View(model);
-        }*/
     }
 }
