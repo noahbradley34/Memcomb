@@ -375,3 +375,4 @@ obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 *.config
 Memcomb.csproj
 .vs/slnx.sqlite
+bin/Memcomb.dll.config
