@@ -1,0 +1,69 @@
+﻿@model Memcomb.Models.Following
+
+@{
+    ViewBag.Title = "Create";
+}
+
+    <link href="@Url.Content("~/Content/Settings.css")" rel="stylesheet" type="text/css" />
+
+<body>
+<h2>Create</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Following</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.User_Following, "User_Following", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("User_Following", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.User_Following, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.User_Followed, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("User_Followed", null, htmlAttributes: new { @class = "form-control" } )
+                @Html.ValidationMessageFor(model => model.User_Followed, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-0 col-md-10">
+                <input type="submit" value="Follow" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+    </body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("Memcomb", "Index", "LogInPage", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Home", "Index", "HomePage")</li>
+                <li>@Html.ActionLink("Notifications", "About", "HomePage")</li>
+                <li>@Html.ActionLink("Messages", "Index", "HomePage")</li>
+                <li>@Html.ActionLink("Profile", "Index", "Profile")</li>
+                <li>@Html.ActionLink("Settings", "Index", "Settings")</li>
+            </ul>
+        </div>
+    </div>
+</div>
