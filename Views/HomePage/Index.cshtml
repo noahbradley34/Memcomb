@@ -5,7 +5,7 @@
 
 <link href="@Url.Content("~/Content/HomePage.css")" rel="stylesheet" type="text/css" />
 
-@model Memcomb.Models.Fragment
+@model Memcomb.Models.HomePageModel
 
 <body class="body">
 	<!-- Trigger/Open The Modal -->
@@ -17,15 +17,20 @@
 		<!-- Modal content -->
 		<div class="modal-content">
 
-			@using (Html.BeginForm())
+			@using (Html.BeginForm("Index", "HomePage", FormMethod.Post, new { enctype = "multipart/form-data" }))
 			{
 				@Html.AntiForgeryToken()
 				<div class="col-md-12">
 					<div class="form-horizontal">
 						<div class="form-group col-md-12">
+							@Html.EditorFor(model => model.memory.Memory_Title, new { htmlAttributes = new { @class = "form-control", placeholder = "Memory Title" } })
+							@Html.EditorFor(model => model.memory.Memory_Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Memory Description" } })
+						</div>
+						<div class="form-group col-md-12">
 							<div class="form-inline">
 								<div class="btn btn-primary">
-									<input type="file" id="imageBrowes" />
+									<!--<input type="file" id="imageBrowes" />-->
+									@Html.TextBoxFor(model => model.fragment.getImagePath, new { @class = "form-control", type = "file", id = "imageBrowes" })
 								</div>
 								<span>
 									<input type="submit" value="Post Memory!" class="btn" />
@@ -43,13 +48,13 @@
 								<div id="imgPreview" class="thumbnail" style="display:none">
 									<img id="targetImg" class="img-responsive" />
 									<div class="caption">
-										@Html.EditorFor(model => model.Fragment_Location, new { htmlAttributes = new { @class = "form-control", id = "memoryLocation", placeholder = "City, State" } })
+										@Html.EditorFor(model => model.fragment.Fragment_Location, new { htmlAttributes = new { @class = "form-control", id = "memoryLocation", placeholder = "City, State" } })
 										<!--<input type="text" id="memoryLocation" placeholder="City, State" />-->
-										@Html.EditorFor(model => model.Fragment_Date, new { htmlAttributes = new { @class = "form-control", id = "memoryDate", placeholder = "mm/dd/yyyy" } })
+										@Html.EditorFor(model => model.fragment.Fragment_Date, new { htmlAttributes = new { @class = "form-control", id = "memoryDate", placeholder = "mm/dd/yyyy" } })
 										<!----<input type="text" id="memoryDate" placeholder="mm/dd/yyyy" />-->
 										<!----<textarea type="text" id="memoryCaption" placeholder="Your Caption" maxlength="300" rows="5" cols="50" class="descriptionInput"></textarea>-->
-										@Html.EditorFor(model => model.Memory_Description, new { htmlAttributes = new { @class = "form-control", id = "memoryCaption", placeholder = "Caption" } })
-										<br /><span id="highlight">Make this your highlight? @Html.EditorFor(model => model.Is_Highlight)</span><br />
+										@Html.EditorFor(model => model.fragment.Memory_Description, new { htmlAttributes = new { @class = "form-control", id = "memoryCaption", placeholder = "Caption" } })
+										<br /><span id="highlight">Make this your highlight? @Html.EditorFor(model => model.fragment.Is_Highlight)</span><br />
 										<a href="#" onclick="ClearPreview()"><i class="glyphicon glyphicon-trash"></i></a>
 										<span id="description"></span>
 									</div>
@@ -58,7 +63,7 @@
 						</div>
 					</div>
 				</div>
-			}
+			 }
 		</div>
 	</div>
 </body>

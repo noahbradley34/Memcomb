@@ -28,7 +28,7 @@ namespace Memcomb.Controllers
         //Registration POST action
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(/*[Bind(Exclude = "IsEmailVerified,ActivationCode")]*/ Fragment fragment)
+        public ActionResult Index(/*[Bind(Exclude = "IsEmailVerified,ActivationCode")]*/ HomePageModel model)
         {
             bool Status = false;
             string message = "";
@@ -36,36 +36,48 @@ namespace Memcomb.Controllers
             // Model Validation
             if (ModelState.IsValid)
             {
-
-                // var userID = User.Identity.GetUserId();
-
-                //User getUserID = User.Identity.Name;
-
                 #region Save to database
                 using (memcombdbEntities dc = new memcombdbEntities())
                 {
-                   // var user = User.FindById(User.Identity.GetUserId());
-
-                    //User userid = dc.Users.Find(User_ID);
-
-
-
-                    Memory newMemory = new Memory()
+                     
+                    if (HttpContext.Request.Cookies["userIDCookie"] != null)
                     {
-                        //User_ID = userID,
-                        Memory_ID = fragment.Fragment_ID,
-                        Memory_Title = "Title",
-                        Memory_Description = "Desc"
-                    };
+                        HttpCookie cookie = HttpContext.Request.Cookies.Get("userIDCookie");
+                        var v = dc.Users.Where(a => a.Email_ID == cookie.Value).FirstOrDefault();
 
-                    dc.Memories.Add(newMemory);
-                    dc.Fragments.Add(fragment);
-                    dc.SaveChanges();
-                    Status = true;
-                    //Directory.CreateDirectory(Server.MapPath("~/Memories/User_ID" + user.User_ID + "/Memory_ID" + memory.Memory_ID));
+                        int memoryIDForFolder = dc.Memories.Max(u => u.Memory_ID);
+                        int fragmentIDPath = dc.Fragments.Max(u => u.Fragment_ID);
+
+                        memoryIDForFolder = memoryIDForFolder + 1;
+                        fragmentIDPath = fragmentIDPath + 1;
+
+                        Memory newMemory = new Memory()
+                        {
+                            User_ID = v.User_ID,
+                            Memory_Title = model.memory.Memory_Title,
+                            Memory_Description = model.memory.Memory_Description
+                        };
+
+                        Directory.CreateDirectory(Server.MapPath("~/Memories/User_ID_" + v.User_ID + "/Memory_ID_" + memoryIDForFolder));
+                        
+                        HttpPostedFileBase file = model.fragment.getImagePath;
+                        
+                        if (file.ContentLength > 0)
+                        {
+                            var fileName = Path.GetFileName(file.FileName);
+                            var path = Path.Combine(Server.MapPath("~/Memories/User_ID_" + v.User_ID + "/Memory_ID_" + memoryIDForFolder), fragmentIDPath + "_" + fileName );
+                            file.SaveAs(path);
+                       
+                            model.fragment.Fragment_Data = path;
+                        }
+
+                        dc.Memories.Add(newMemory);
+                        dc.Fragments.Add(model.fragment);
+                        dc.SaveChanges();
+                        Status = true;  
+                    }
                 }
                 #endregion
-
             }
             else
             {
@@ -74,7 +86,7 @@ namespace Memcomb.Controllers
 
             ViewBag.Message = message;
             ViewBag.Status = Status;
-            return View(fragment);
+            return View(model);
 
         }
 
