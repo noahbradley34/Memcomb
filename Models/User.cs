@@ -11,7 +11,9 @@ namespace Memcomb.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.Web;
+
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -28,7 +30,9 @@ namespace Memcomb.Models
         public string Password { get; set; }
         public Nullable<System.DateTime> Date_Of_Birth { get; set; }
         public string Phone_Number { get; set; }
-        public string Profile_Picture { get; set; }
+        [Display(Name = "Profile_Photo")]
+        public HttpPostedFileBase Profile_Picture { get; set; }
+        public HttpPostedFileBase getImagePath { get; set; }
         public string Biography { get; set; }
         public bool Is_Verified { get; set; }
         public string Activation_Code { get; set; }

@@ -11,12 +11,12 @@
         if (photo != null)
         {
             newFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(photo.FileName);
-            imagePath = @"Images\"+newFileName;
-            photo.Save(@"~\"+imagePath);
+            imagePath = @"Images\" + newFileName;
+            photo.Save(@"~\" + imagePath);
         }
     }
- }
-@{ 
+}
+@{
     WebImage Profilephoto = null;
     var ProfileFileName = "";
     var ProfilePath = "";
@@ -32,32 +32,56 @@
     }
 }
 
+@model Memcomb.Models.ProfilePageModel
 <link href="@Url.Content("~/Content/Profile.css")" rel="stylesheet" type="text/css" />
-
 <head>
 	<div class="head">
 		<div class="banner">
-		@if (imagePath != "")
-		{
-			<div class="background-image">
-				<img src="@imagePath" />
-			</div>
-			<br />
-        }
-        else
-        {
-			<div class="background-image">Upload background image</div>
-        }
-		</div>
-		<div class="spaceBetween">
-			@if (ProfilePath != "")
+			@if (imagePath != "")
             {
-				<img src="@ProfilePath" />
+				<div class="background-image">
+					<img src="@imagePath" />
+				</div>
+				<br />
             }
             else
             {
-			<img src="@Url.Content("~/Content/Images/facebookdefaultprofile.jpg")" />
+				<div class="background-image">Upload background image</div>
             }
+		</div>
+		<div class="spaceBetween">
+			<h1>
+				<img src="@Url.Action("Index", "Profile")" style="width:160px; height:160px; 
+				margin: auto;
+				-moz-border-radius: 60px;
+				border-radius: 100px;
+				padding: 6px;
+				box-shadow: 0px 0px 20px #ff6a00;"/>
+			</h1>
+			<br />
+			<div>
+			@using (Html.BeginForm("Index", "Profile", FormMethod.Post, new
+                        {enctype = "multipart/form-data"
+            })){
+				@Html.AntiForgeryToken()
+				<div class="form-group">
+					<div class="form-inline">
+						@Html.LabelFor(model => model.user.Profile_Picture, new { @class = "form-control", type = "file", id = "imageBrowes"})
+						<input type="file" name="Edit Profile Image" id="profileImage" accept=".png,.jpg,.jpeg,.gif,.tif"/>
+						<input type="submit" value="Upload Profile" class="btn" />
+					</div>
+				</div>
+			}
+			</div>
+			<!--if (ProfilePath != "")
+            {
+				<img src="ProfilePath" />
+            }
+            else
+            {
+				<img src="Url.Content("~/Content/Images/facebookdefaultprofile.jpg")" />
+            }
+			-->
 			<!--<input type="file" onchange="loadImageFile(this)"/>-->
 			<form action="" method="post" enctype="multipart/form-data">
 				<input type="file" name="Image" />
@@ -65,7 +89,7 @@
 				<input type="submit" value="Upload" />
 			</form>
 			<div>
-				<a href="@Url.Action("Index","HomePage")" class="editProfileBtn">
+				<a href="@Url.Action("Index", "HomePage")" class="editProfileBtn">
 					Edit Profile
 				</a>
 			</div>

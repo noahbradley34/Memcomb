@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.IO;
-
+using Memcomb.Models;
 namespace Memcomb.Controllers
 {
     public class ProfileController : Controller
@@ -20,14 +20,14 @@ namespace Memcomb.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Upload(HttpPostedFileBase file) {
+        /* ActionResult Upload(HttpPostedFileBase file) {
                 if (file != null && file.ContentLength > 0) {
                     var fileName = Path.GetFileName(file.FileName);
                     var path = Path.Combine(Server.MapPath("~/Images/"), fileName);
                     file.SaveAs(path);
                 }
             return RedirectToAction("Index");
-        }
+        }*/
         // GET: Profile/Create
         public ActionResult Create()
         {
@@ -92,6 +92,34 @@ namespace Memcomb.Controllers
             {
                 return View();
             }
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(ProfilePageModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                byte[] imageData = null;
+               
+                    HttpPostedFileBase imgFile = Request.Files["profileImage"];
+                var binary = new BinaryReader(imgFile.InputStream);
+                        imageData = binary.ReadBytes(imgFile.ContentLength);
+                var user = new User { User_ID = model.user.User_ID, First_Name = model.user.First_Name, Last_Name = model.user.Last_Name };
+                user.Profile_Picture = imgFile;
+            }
+            return View(model);
+        }
+        public FileContentResult ProfilePhotos()
+        {
+             string fileName = HttpContext.Server.MapPath(@"~/Images/noImg.png");
+             byte[] imageData = null;
+             FileInfo fileInfo = new FileInfo(fileName);
+             long imageFileLength = fileInfo.Length;
+             FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+             BinaryReader br = new BinaryReader(fs);
+             imageData = br.ReadBytes((int)imageFileLength);
+             return File(imageData, "image/png");
         }
     }
 }
