@@ -141,6 +141,7 @@
     <Compile Include="Models\Fragment.cs">
       <DependentUpon>memcombDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\HomePageModel.cs" />
     <Compile Include="Models\memcombDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -239,9 +240,11 @@
     <Content Include="Views\Followings\Details.cshtml" />
     <Content Include="Views\Followings\Edit.cshtml" />
     <Content Include="Views\Followings\Index.cshtml" />
+    <Content Include="Views\HomePage\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Memories\UserID\MemoryID\" />
     <Folder Include="Queries\" />
   </ItemGroup>
   <ItemGroup>
