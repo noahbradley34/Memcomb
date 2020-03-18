@@ -57,7 +57,7 @@ namespace Memcomb.Controllers
                             Memory_Title = model.memory.Memory_Title,
                             Memory_Description = model.memory.Memory_Description
                         };
-
+                        
                         Directory.CreateDirectory(Server.MapPath("~/Memories/User_ID_" + v.User_ID + "/Memory_ID_" + memoryIDForFolder));
                         
                         HttpPostedFileBase file = model.fragment.getImagePath;
