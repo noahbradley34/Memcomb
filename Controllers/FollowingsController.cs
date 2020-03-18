@@ -14,13 +14,35 @@ namespace Memcomb.Controllers
     {
         private memcombdbEntities db = new memcombdbEntities();
 
-        // GET: Followings
-        public ActionResult Index()
+       /* public ActionResult Index()
         {
             var followings = db.Followings.Include(f => f.User);
             return View(followings.ToList());
         }
+        */
 
+        // GET: Followings/Email_ID
+        public ActionResult Index(String id)
+        {
+            if (HttpContext.Request.Cookies["userIDCookie"] != null)
+            {
+                HttpCookie cookie = HttpContext.Request.Cookies.Get("userIDCookie");
+                var v = db.Users.Where(a => a.Email_ID == cookie.Value).FirstOrDefault();
+                //id = v.Email_ID;
+
+                var data = db.Followings.Include(f => f.User).Where(f => f.User.Email_ID == id); 
+
+
+                return View(data);
+            }
+            else
+            {
+                var followings = db.Followings.Include(f => f.User);
+                return View(followings.ToList());
+            }
+            //return View();
+        }
+        
         // GET: Followings/Details/5
         public ActionResult Details(int? id)
         {

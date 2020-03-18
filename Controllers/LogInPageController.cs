@@ -82,6 +82,7 @@ namespace Memcomb.Controllers
             string message = "";
             using (memcombdbEntities dc = new memcombdbEntities())
             {
+                
                 var v = dc.Users.Where(a => a.Email_ID == login.Email_ID).FirstOrDefault();
                 if (v != null)
                 {
@@ -90,6 +91,7 @@ namespace Memcomb.Controllers
                         int timeout = login.RememberMe ? 525600 : 20;
                         
                         HttpCookie userIDCookie = new HttpCookie("userIDCookie", login.Email_ID);
+                        
                         userIDCookie.Expires = DateTime.Now.AddMinutes(timeout);
                         Response.Cookies.Add(userIDCookie);
 
