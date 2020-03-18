@@ -70,45 +70,54 @@
 	<!-- Start of homepage memories -->
 	<div>
 		<!--
-		<div>
-			<input type="button" id="button" onclick="duplicateMemoriesDiv()" value="Add Another Memory" class="btn" />
-		</div>
-		-->
-		<div id="duplicatorForTimeLineMemories">
-			<hr />
+	<div>
+		<input type="button" id="button" onclick="duplicateMemoriesDiv()" value="Add Another Memory" class="btn" />
+	</div>
+	-->
 
-			<div id="memoryID_" class="displayMemoryBackground">
+		@foreach (var file in Directory.GetFiles(Server.MapPath("~/Memories/User_ID_2021/Memory_ID_19")))
+		{
+			//set the image src to that file
+			var res = file.Replace(@"\", "/");
+			var replace = res.Replace(@"C:/Users/17347/Desktop/Capstone Project/Github/MemcombRepo/Memcomb", "");
 
-				<span id="profileUserID_" class="profilePicAndUserName">
+
+			<div id="duplicatorForTimeLineMemories">
+				<hr />
+
+				<div id="memoryID_" class="displayMemoryBackground">
+
+					<span id="profileUserID_" class="profilePicAndUserName">
 						<img src="~/Images/memcombLogo.png" id="memoryHighlight" class="profilePic" />
-					<span class="userName">User Name</span>
-				</span>
+						<span class="userName">User Name</span>
+					</span>
 
-				<hr />
+					<hr />
 
-				<!-- Trigger/Open The Modal -->
-				<div class="displayMemoryBtn">
-					@foreach (var file in Directory.GetFiles(Server.MapPath("~/Memories/User_ID_2021/Memory_ID_20"))) { 
-						<button class="displayMemoryBtnBackground" id="viewMemoryID_"><img class="memoryHighlight" src="@file"></button>
-					}
-				</div>
+					<!-- Trigger/Open The Modal -->
+					<div class="displayMemoryBtn">
+						
+						<button class="displayMemoryBtnBackground" id="viewMemoryID_"><img class="memoryHighlight" src="@replace"></button>
+						<button class="displayMemoryBtnBackground" id="viewMemoryID_"><img class="memoryHighlight" src="~/Memories/User_ID_2021/Memory_ID_20/24_giants.jfif"></button>
 
-				<hr />
+					</div>
 
-				<!-- The Modal -->
-				<div id="theMemories" class="modal">
+					<hr />
 
-					<!-- Modal content -->
-					<div class="modal-content">
+					<!-- The Modal -->
+					<div id="theMemories" class="modal">
 
-						<span id="viewMemoryClose" class="close">&times;</span>
+						<!-- Modal content -->
+						<div class="modal-content">
+
+							<span id="viewMemoryClose" class="close">&times;</span>
+						</div>
 					</div>
 				</div>
+
+
 			</div>
-		
-		
-		</div>
-		
+		 }
 		<hr />
 	</div>
 	<!-- End of homepage memories -->
@@ -117,6 +126,7 @@
 </body>
 
 <script>
+
 	// Get the modal
 	var modal = document.getElementById("myModal"); // Create Memory Modal
 	var theMemoriesModal = document.getElementById("theMemories"); // View Memory Modal
