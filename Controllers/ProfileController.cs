@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.IO;
+using Memcomb.Models;
 
 namespace Memcomb.Controllers
 {
@@ -12,6 +13,7 @@ namespace Memcomb.Controllers
         // GET: Profile
         public ActionResult Index()
         {
+           
             return View();
         }
         // GET: Profile/Details/5
