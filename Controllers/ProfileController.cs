@@ -14,6 +14,13 @@ namespace Memcomb.Controllers
         {
             return View();
         }
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(ProfilePageModel model)
+        {
+            return View(model);
+        }
         // GET: Profile/Details/5
         public ActionResult Details(int id)
         {
@@ -93,24 +100,80 @@ namespace Memcomb.Controllers
                 return View();
             }
         }
+  
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(ProfilePageModel model)
+        public ActionResult ProfilePic(ProfilePageModel model)
         {
+            bool Status = false;
+            string message = "";
             if (ModelState.IsValid)
             {
-                byte[] imageData = null;
-               
-                    HttpPostedFileBase imgFile = Request.Files["profileImage"];
-                var binary = new BinaryReader(imgFile.InputStream);
-                        imageData = binary.ReadBytes(imgFile.ContentLength);
-                var user = new User { User_ID = model.user.User_ID, First_Name = model.user.First_Name, Last_Name = model.user.Last_Name };
-                user.Profile_Picture = imgFile;
+               using (memcombdbEntities dc = new memcombdbEntities())
+                {
+                    if (HttpContext.Request.Cookies["userIDCookie"] != null)
+                    {
+                        HttpCookie cookie = HttpContext.Request.Cookies.Get("userIDCookie");
+                        var v = dc.Users.Where(a => a.Email_ID == cookie.Value).FirstOrDefault();
+                        string ProfileIDPath = dc.Users.Max(u => u.Profile_Picture);
+                        string ProfileDirectory = dc.Users.Max(u => u.Profile_Picture);
+                        ProfileDirectory = ProfileDirectory + 1;
+                        ProfileIDPath = ProfileIDPath + 1;
+                        Directory.CreateDirectory(Server.MapPath("~/Users/User_ID_" + v.User_ID + "/Profile_ID_" + ProfileDirectory));
+                        HttpPostedFileBase file = model.user.Profile_Picture_imgPath;
+                        if (file.ContentLength > 0)
+                        {
+                            var fileName = Path.GetFileName(file.FileName);
+                            var path = Path.Combine(Server.MapPath("~/Users/User_ID_" + v.User_ID + "/Profile_ID_" + ProfileDirectory), ProfileIDPath + "_" + fileName);
+                            file.SaveAs(path);
+                            model.user.Profile_Picture = path;
+                        }
+                        dc.Users.Add(model.user);
+                        dc.SaveChanges();
+                        Status = true;
+                    }
+                }
             }
-            return View(model);
+            return View("Index", model);
         }
-        public FileContentResult ProfilePhotos()
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult BackgroundPic(ProfilePageModel model)
+        {
+            bool Status = false;
+            string message = "";
+            if (ModelState.IsValid)
+            {
+                using (memcombdbEntities dc = new memcombdbEntities())
+                {
+                    if (HttpContext.Request.Cookies["userIDCookie"] != null)
+                    {
+                        HttpCookie cookie = HttpContext.Request.Cookies.Get("userIDCookie");
+                        var v = dc.Users.Where(a => a.Email_ID == cookie.Value).FirstOrDefault();
+                        string BackgroundIDPath = dc.Users.Max(u => u.Background_Pic);
+                        string BackgroundDirectory = dc.Users.Max(u => u.Background_Pic);
+                        BackgroundDirectory = BackgroundDirectory + 1;
+                        BackgroundIDPath = BackgroundIDPath + 1;
+                        Directory.CreateDirectory(Server.MapPath("~/Users/User_ID_" + v.User_ID + "/Background_ID_" + BackgroundDirectory));
+                        HttpPostedFileBase file1 = model.user.Background_Photo;
+                        if (file1.ContentLength > 0)
+                        {
+                            var fileName = Path.GetFileName(file1.FileName);
+                            var path = Path.Combine(Server.MapPath("~/Users/User_ID_" + v.User_ID + "/Background_ID_" + BackgroundDirectory), BackgroundIDPath + "_" + fileName);
+                            file1.SaveAs(path);
+                            model.user.Background_Pic = path;
+                        }
+                        dc.Users.Add(model.user);
+                        dc.SaveChanges();
+                        Status = true;
+                    }
+                }
+            }
+            return View("Index", model);
+        }
+     /*   public FileContentResult ProfilePhotos()
         {
              string fileName = HttpContext.Server.MapPath(@"~/Images/noImg.png");
              byte[] imageData = null;
@@ -120,6 +183,6 @@ namespace Memcomb.Controllers
              BinaryReader br = new BinaryReader(fs);
              imageData = br.ReadBytes((int)imageFileLength);
              return File(imageData, "image/png");
-        }
+        }*/
     }
 }

@@ -134,6 +134,21 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Blocking.cs">
+      <DependentUpon>memcombDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Comment.cs">
+      <DependentUpon>memcombDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Connection.cs">
+      <DependentUpon>memcombDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Convo.cs">
+      <DependentUpon>memcombDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Flag.cs">
+      <DependentUpon>memcombDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Following.cs">
       <DependentUpon>memcombDB.tt</DependentUpon>
     </Compile>
@@ -141,6 +156,9 @@
       <DependentUpon>memcombDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HomePageModel.cs" />
+    <Compile Include="Models\Like.cs">
+      <DependentUpon>memcombDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\memcombDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -157,6 +175,9 @@
       <DependentUpon>memcombDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Memory.cs">
+      <DependentUpon>memcombDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Message.cs">
       <DependentUpon>memcombDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProfilePageModel.cs" />
@@ -241,6 +262,8 @@
     <Folder Include="App_Data\" />
     <Folder Include="Memories\UserID\MemoryID\" />
     <Folder Include="Queries\" />
+    <Folder Include="Users\UserID\BackgroundID\" />
+    <Folder Include="Users\UserID\ProfileID\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

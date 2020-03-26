@@ -1,11 +1,12 @@
 ﻿@{
-    ViewBag.Title = "Profile";
+	ViewBag.Title = "Profile";
 }
+@model Memcomb.Models.ProfilePageModel
 @{
     WebImage photo = null;
     var newFileName = "";
     var imagePath = "";
-    if (IsPost)
+    if (Request.Form["uploadProfile"]!=null)
     {
         photo = WebImage.GetImageFromRequest();
         if (photo != null)
@@ -17,77 +18,112 @@
     }
 }
 @{
-    WebImage Profilephoto = null;
-    var ProfileFileName = "";
-    var ProfilePath = "";
-    if (IsPost)
+    WebImage background = null;
+    var BackgroundFileName = "";
+    var BackgroundPath = "";
+    if (Request.Form["uploadBackground"]!=null)
     {
-        photo = WebImage.GetImageFromRequest();
-        if (Profilephoto != null)
+        background = WebImage.GetImageFromRequest();
+        if (background != null)
         {
-            ProfileFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(photo.FileName);
-            ProfilePath = @"Images\" + ProfileFileName;
-            Profilephoto.Save(@"~\" + ProfilePath);
+            BackgroundFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(background.FileName);
+            BackgroundPath = @"Images\" + BackgroundFileName;
+            background.Save(@"~\" + BackgroundPath);
         }
     }
 }
-
-@model Memcomb.Models.ProfilePageModel
 <link href="@Url.Content("~/Content/Profile.css")" rel="stylesheet" type="text/css" />
 <head>
 	<div class="head">
-		<div class="banner">
-			@if (imagePath != "")
-            {
-				<div class="background-image">
-					<img src="@imagePath" />
+		<div>
+			@if (BackgroundPath != "")
+			{
+				<div>
+					<img class="background-image" src="@BackgroundPath" style="margin:auto; padding: 6px;"/>
 				</div>
 				<br />
-            }
-            else
-            {
-				<div class="background-image">Upload background image</div>
-            }
-		</div>
-		<div class="spaceBetween">
-			<h1>
-				<img src="@Url.Action("Index", "Profile")" style="width:160px; height:160px; 
-				margin: auto;
-				-moz-border-radius: 60px;
-				border-radius: 100px;
-				padding: 6px;
-				box-shadow: 0px 0px 20px #ff6a00;"/>
-			</h1>
-			<br />
-			<div>
-			@using (Html.BeginForm("Index", "Profile", FormMethod.Post, new
-                        {enctype = "multipart/form-data"
-            })){
-				@Html.AntiForgeryToken()
-				<div class="form-group">
-					<div class="form-inline">
-						@Html.LabelFor(model => model.user.Profile_Picture, new { @class = "form-control", type = "file", id = "imageBrowes"})
-						<input type="file" name="Edit Profile Image" id="profileImage" accept=".png,.jpg,.jpeg,.gif,.tif"/>
-						<input type="submit" value="Upload Profile" class="btn" />
-					</div>
+			}
+			else
+			{
+				<div class="background-image">
+					Upload Background Here
 				</div>
 			}
+		</div>
+		<div>
+			@if (imagePath != "")
+			{
+				<div>
+					<img src="@imagePath" style="width:160px; height:160px;
+					margin: auto;
+					-moz-border-radius: 60px;
+					border-radius: 100px;
+					padding: 6px;
+					box-shadow: 0px 0px 20px #ff6a00;" />
+				</div>
+				<br />
+			}
+			else
+			{
+				<div>
+					<img src="@Url.Action("ProfilePic", "Profile")" style="width:160px; height:160px;
+					margin: auto;
+					-moz-border-radius: 60px;
+					border-radius: 100px;
+					padding: 6px;
+					box-shadow: 0px 0px 20px #ff6a00;" />
+				</div>
+			}
+		</div>
+		<h1>
+			<!--<img src="@Url.Action("Index", "Profile")" style="width:160px; height:160px;
+					margin: auto;
+					-moz-border-radius: 60px;
+					border-radius: 100px;
+					padding: 6px;
+					box-shadow: 0px 0px 20px #ff6a00;" />-->
+		</h1>
+		<div class="spaceBetween">
+			<div>
+				@using (Html.BeginForm("ProfilePic", "Profile", FormMethod.Post, new
+				{
+					enctype = "multipart/form-data"
+				}))
+				{
+					@Html.AntiForgeryToken()
+					<div class="form-group">
+						<div class="form-inline">
+							<input type="file" name="Edit Profile Image" id="profileImage" accept=".png,.jpg,.jpeg,.gif,.tif" />
+							<input type="submit" name="uploadProfile" value="Upload Profile" class="btn" onclick="@photo"/>
+						</div>
+					</div>
+				}
 			</div>
 			<!--if (ProfilePath != "")
-            {
+			{
 				<img src="ProfilePath" />
-            }
-            else
-            {
+			}
+			else
+			{
 				<img src="Url.Content("~/Content/Images/facebookdefaultprofile.jpg")" />
-            }
+			}
 			-->
 			<!--<input type="file" onchange="loadImageFile(this)"/>-->
-			<form action="" method="post" enctype="multipart/form-data">
-				<input type="file" name="Image" />
-				</br>
-				<input type="submit" value="Upload" />
-			</form>
+			<div>
+				@using (Html.BeginForm("BackgroundPic", "Profile", FormMethod.Post, new
+				{
+					enctype = "multipart/form-data"
+				}))
+				{
+					@Html.AntiForgeryToken()
+					<div class="form-group">
+						<div class="form-inline">
+							<input type="file" name="Edit Background Image" id="backgroundImage" accept=".png,.jpg,.jpeg,.gif,.tif" />
+							<input type="submit" name="uploadBackground" value="Upload Background" class="btn"/>
+						</div>
+					</div>
+				}
+			</div>
 			<div>
 				<a href="@Url.Action("Index", "HomePage")" class="editProfileBtn">
 					Edit Profile
