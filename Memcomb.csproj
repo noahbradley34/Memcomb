@@ -55,6 +55,7 @@
       <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -146,6 +147,7 @@
     <Compile Include="Models\Convo.cs">
       <DependentUpon>memcombDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CreateMemoryModel.cs" />
     <Compile Include="Models\Flag.cs">
       <DependentUpon>memcombDB.tt</DependentUpon>
     </Compile>
@@ -256,7 +258,7 @@
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\SignUpPage\Index.cshtml" />
     <Content Include="Views\Settings\Index.cshtml" />
-    <Content Include="Views\HomePage\View.cshtml" />
+    <Content Include="Views\HomePage\_CreateMemory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
