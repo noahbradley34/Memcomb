@@ -50,7 +50,8 @@ namespace Memcomb.Controllers
 
 
                 #region Password Hashing
-                user.Password = Encrypt.Hash(user.Password);
+                //user.Password = Encrypt.Hash(user.Password);
+                //user.ConfirmPassword = Encrypt.Hash(user.ConfirmPassword);
                 #endregion
 
                // user.IsEmailVerified = false;
