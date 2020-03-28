@@ -17,9 +17,57 @@ namespace Memcomb.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(ProfilePageModel model)
+        public ActionResult Index(ProfilePageModel model, string id)
         {
-            return View(model);
+            bool Status = false;
+            string message = "";
+            if (ModelState.IsValid)
+            {
+                using (memcombdbEntities dc = new memcombdbEntities())
+                {
+                    if (HttpContext.Request.Cookies["userIDCookie"] != null)
+                    {
+                        HttpCookie cookie = HttpContext.Request.Cookies.Get("userIDCookie");
+                        var v = dc.Users.Where(a => a.Email_ID == cookie.Value).FirstOrDefault();
+                        if (id == "profileImage")
+                        {
+                            string ProfileIDPath = dc.Users.Max(u => u.Profile_Picture);
+                            string ProfileDirectory = dc.Users.Max(u => u.Profile_Picture);
+                            ProfileDirectory = ProfileDirectory + 1;
+                            ProfileIDPath = ProfileIDPath + 1;
+                            Directory.CreateDirectory(Server.MapPath("~/Users/User_ID_" + v.User_ID + "/Profile_ID_" + ProfileDirectory));
+                            HttpPostedFileBase file = model.user.Profile_Picture_imgPath;
+                            if (file.ContentLength > 0)
+                            {
+                                var fileName = Path.GetFileName(file.FileName);
+                                var path = Path.Combine(Server.MapPath("~/Users/User_ID_" + v.User_ID + "/Profile_ID_" + ProfileDirectory), ProfileIDPath + "_" + fileName);
+                                file.SaveAs(path);
+                                model.user.Profile_Picture = path;
+                            }
+                        }
+                        if (id == "backgroundImage")
+                        {
+                            string BackgroundIDPath = dc.Users.Max(u => u.Background_Pic);
+                            string BackgroundDirectory = dc.Users.Max(u => u.Background_Pic);
+                            BackgroundDirectory = BackgroundDirectory + 1;
+                            BackgroundIDPath = BackgroundIDPath + 1;
+                            Directory.CreateDirectory(Server.MapPath("~/Users/User_ID_" + v.User_ID + "/Background_ID_" + BackgroundDirectory));
+                            HttpPostedFileBase file1 = model.user.Background_Photo;
+                            if (file1.ContentLength > 0)
+                            {
+                                var fileName = Path.GetFileName(file1.FileName);
+                                var path = Path.Combine(Server.MapPath("~/Users/User_ID_" + v.User_ID + "/Background_ID_" + BackgroundDirectory), BackgroundIDPath + "_" + fileName);
+                                file1.SaveAs(path);
+                                model.user.Background_Pic = path;
+                            }
+                        }
+                        dc.Users.Add(model.user);
+                        dc.SaveChanges();
+                        Status = true;
+                    }
+                }
+            }
+            return View();
         }
         // GET: Profile/Details/5
         public ActionResult Details(int id)
@@ -100,8 +148,8 @@ namespace Memcomb.Controllers
                 return View();
             }
         }
-  
-        [HttpPost]
+
+       /* [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult ProfilePic(ProfilePageModel model)
@@ -110,7 +158,7 @@ namespace Memcomb.Controllers
             string message = "";
             if (ModelState.IsValid)
             {
-               using (memcombdbEntities dc = new memcombdbEntities())
+                using (memcombdbEntities dc = new memcombdbEntities())
                 {
                     if (HttpContext.Request.Cookies["userIDCookie"] != null)
                     {
@@ -172,17 +220,6 @@ namespace Memcomb.Controllers
                 }
             }
             return View("Index", model);
-        }
-     /*   public FileContentResult ProfilePhotos()
-        {
-             string fileName = HttpContext.Server.MapPath(@"~/Images/noImg.png");
-             byte[] imageData = null;
-             FileInfo fileInfo = new FileInfo(fileName);
-             long imageFileLength = fileInfo.Length;
-             FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-             BinaryReader br = new BinaryReader(fs);
-             imageData = br.ReadBytes((int)imageFileLength);
-             return File(imageData, "image/png");
         }*/
     }
 }

@@ -11,27 +11,5 @@ namespace Memcomb.Models
     {
         public Following following { get; set; }
         public User user { get; set; }
-        public Boolean setProfile(bool post)
-        {
-            if (post == true)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        public Boolean setBackground(bool post)
-        {
-            if (post == true)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
     }
 }
