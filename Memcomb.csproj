@@ -147,7 +147,6 @@
     <Compile Include="Models\Convo.cs">
       <DependentUpon>memcombDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CreateMemoryModel.cs" />
     <Compile Include="Models\Flag.cs">
       <DependentUpon>memcombDB.tt</DependentUpon>
     </Compile>
@@ -157,7 +156,6 @@
     <Compile Include="Models\Fragment.cs">
       <DependentUpon>memcombDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\HomePageModel.cs" />
     <Compile Include="Models\Like.cs">
       <DependentUpon>memcombDB.tt</DependentUpon>
     </Compile>

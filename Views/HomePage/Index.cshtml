@@ -44,18 +44,18 @@
 						<!-- Trigger/Open The Modal -->
 						<div class="displayMemoryBtn">
 
-							<button class="displayMemoryBtnBackground" id="memoryID"><img class="memoryHighlight" src="@setImage"></button>
+							<button class="displayMemoryBtnBackground" id="@memoryID" onClick="viewMemoryBtn(this.id)"><img class="memoryHighlight" src="@setImage"></button>
 
 						</div>
 
 
 						<!-- The Modal -->
-						<div id="theMemories" class="modal">
+						<div id="theMemories_@memoryID" class="modal">
 
 							<!-- Modal content -->
 							<div class="modal-content">
 
-								<span id="viewMemoryClose" class="close">&times;</span>
+								<span id="@memoryID" onClick="theMemoriesModalClose()" class="close">&times;</span>
 							</div>
 						</div>
 					</div>
@@ -71,30 +71,28 @@
 <script>
 
 	// Get the modal
-	var theMemoriesModal = document.getElementById("theMemories"); // View Memory Modal
-
-	// Get the button that opens the modal
-	var viewMemoryBtn = document.getElementById("memoryID"); // View Memory Modal
-
-	// Get the <span> element that closes the modal
-	var theMemoriesModalClose = document.getElementById("viewMemoryClose");
+	var theMemoriesModal;
+	var clicked_id;
 
 	// When the user clicks the button, open the modal
-	viewMemoryBtn.onclick = function () {
+	function viewMemoryBtn(id)
+	{
+		clicked_id = id;
+		theMemoriesModal = document.getElementById("theMemories_" + clicked_id);
 		theMemoriesModal.style.display = "block";
 	}
 
 	// When the  user clicks on <span> (x), close the modal
-	theMemoriesModalClose.onclick = function () {
+	function theMemoriesModalClose() {
 		theMemoriesModal.style.display = "none";
 	}
 
 	// When the user clicks anywhere outside of the modal, close it
-	window.onclick = function (event) {
+	window.addEventListener("click", function (event) {
 		if (event.target == theMemoriesModal) {
 			theMemoriesModal.style.display = "none";
 		}
-	}
+	});
 
 </script>
 
