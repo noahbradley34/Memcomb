@@ -45,7 +45,9 @@
 						<div class="displayMemoryBtn">
 
 							<button class="displayMemoryBtnBackground" id="@memoryID" onClick="viewMemoryBtn(this.id)">
-								@if(frag.Is_Highlight == false)// ask why it fails under true, or just doesn't work in general
+								
+
+								@if((bool)frag.Is_Highlight == true)// ask why it fails under true, or just doesn't work in general
 								{
 									<img class="memoryHighlight" src="@setImage">
 								}
