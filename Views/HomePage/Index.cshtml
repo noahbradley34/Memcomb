@@ -44,7 +44,12 @@
 						<!-- Trigger/Open The Modal -->
 						<div class="displayMemoryBtn">
 
-							<button class="displayMemoryBtnBackground" id="@memoryID" onClick="viewMemoryBtn(this.id)"><img class="memoryHighlight" src="@setImage"></button>
+							<button class="displayMemoryBtnBackground" id="@memoryID" onClick="viewMemoryBtn(this.id)">
+								@if(frag.Is_Highlight == false)// ask why it fails under true, or just doesn't work in general
+								{
+									<img class="memoryHighlight" src="@setImage">
+								}
+							</button>
 
 						</div>
 
@@ -54,6 +59,10 @@
 
 							<!-- Modal content -->
 							<div class="modal-content">
+								<img class="memoryHighlight" src="@setImage"/>
+								@Html.DisplayFor(model => frag.Fragment_Location)
+								@Html.DisplayFor(model => frag.Fragment_Date)
+								@Html.DisplayFor(model => frag.Memory_Description)
 
 								<span id="@memoryID" onClick="theMemoriesModalClose()" class="close">&times;</span>
 							</div>
