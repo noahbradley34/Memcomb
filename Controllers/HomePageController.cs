@@ -24,37 +24,48 @@ namespace Memcomb.Controllers
         {
             memcombdbEntities db = new memcombdbEntities();
 
+            List<User> userList = new List<User>();
             List<Memory> memoryList = new List<Memory>();
             List<Fragment> fragmentList = new List<Fragment>();
 
-            //var fragment = from Fragments in db.Fragments select Fragments;
-
-            foreach (var item in db.Memories)
+            foreach (var u in db.Users)
             {
-                Memory mem = db.Memories.Find(item.Memory_ID);
-                
-                var v = db.Fragments.Where(a => a.Memory_ID == item.Memory_ID);
-                foreach (var s in v)  
-                {   
-                    fragmentList.Add(new Fragment
-                    {
-                        Memory_ID = s.Memory_ID,
-                        Fragment_ID = s.Fragment_ID,
-                        Fragment_Date = s.Fragment_Date,
-                        Fragment_Data = s.Fragment_Data,
-                        Fragment_Location = s.Fragment_Location
-                    });
-                }
-                memoryList.Add(new Memory
+                User user = db.Users.Find(u.User_ID);
+ 
+                foreach (var item in db.Memories)
                 {
-                    Memory_ID = mem.Memory_ID,
-                    Memory_Title = mem.Memory_Title,
-                    Memory_Description = mem.Memory_Description,
-                    fragmentList = fragmentList
-                });
-            }   
-            return View(memoryList);
+                    Memory mem = db.Memories.Find(item.Memory_ID);
+                
+                    var v = db.Fragments.Where(a => a.Memory_ID == item.Memory_ID);
+                    foreach (var s in v)  
+                    {   
+                        fragmentList.Add(new Fragment
+                        {
+                            Memory_ID = s.Memory_ID,
+                            Fragment_ID = s.Fragment_ID,
+                            Fragment_Date = s.Fragment_Date,
+                            Fragment_Data = s.Fragment_Data,
+                            Memory_Description = s.Memory_Description,
+                            Fragment_Location = s.Fragment_Location
+                        });
+                    }
+                    memoryList.Add(new Memory
+                    {
+                        Memory_ID = mem.Memory_ID,
+                        Memory_Title = mem.Memory_Title,
+                        Memory_Description = mem.Memory_Description,
+                        fragmentList = fragmentList
+                    });
+                }   
 
+                userList.Add(new User
+                {
+                    First_Name = u.First_Name,
+                    Last_Name = u.Last_Name,
+                    memoryList = memoryList
+                });
+            }
+            return View(userList);
         }
         
         //Registration POST action

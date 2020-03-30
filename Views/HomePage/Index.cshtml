@@ -1,5 +1,5 @@
 ﻿@using Memcomb;
-@model IEnumerable<Memcomb.Models.Memory>
+@model IEnumerable<Memcomb.Models.User>
 
 @{
 	ViewBag.Title = "Index";
@@ -12,74 +12,101 @@
 	<!-- Start of homepage memories -->
 	<div>
 
-		@foreach (var item in Model.Reverse())
+		@foreach (var user in Model.Reverse())
 		{
-			foreach (var frag in item.fragmentList.Where(a => a.Memory_ID == item.Memory_ID))
+			foreach (var mem in user.memoryList.Where(a => a.User_ID == user.User_ID))
 			{
+				foreach (var frag in mem.fragmentList.Where(a => a.Memory_ID == mem.Memory_ID))
+				{
+					var res = frag.Fragment_Data.Replace(@"C:\Users\17347\Desktop\Capstone Project\Github\MemcombRepo\Memcomb", ""); //Need to set this to work for server
+					var setImage = res.Replace(@"\", "/");
+					var memoryID = frag.Memory_ID;
 
-				var res = frag.Fragment_Data.Replace(@"C:\Users\17347\Desktop\Capstone Project\Github\MemcombRepo\Memcomb", ""); //Need to set this to work for server
-				var setImage = res.Replace(@"\", "/");
-				var memoryID = frag.Memory_ID;
+					<div>
+						<br /><br />
 
-				<div>
-					<hr />
+						<div class="displayMemoryBackground">
 
-					<div class="displayMemoryBackground">
-
-						<span id="profileUserID_" class="profilePicAndUserName">
-							<img src="~/Images/memcombLogo.png" id="memoryHighlight" class="profilePic" /> <!-- Will eventually change the profile pic image source -->
-							<span class="userName">User Name</span>
-							<span>
-								Memory Title
+							<span id="profileUserID_" class="profilePicAndUserName">
+								<img src="~/Images/memcombLogo.png" id="memoryHighlight" class="profilePic" /> <!-- Will eventually change the profile pic image source -->
+								<span class="userName">
+									@Html.DisplayFor(Model => user.First_Name)
+									@Html.DisplayFor(Model => user.Last_Name)
+								</span>
 							</span>
-						</span>
+							<div class="memoryTitle">
+								@Html.DisplayFor(Model => mem.Memory_Title)
+							</div>
+							<div class="memoryDescription">
+								@Html.DisplayFor(Model => mem.Memory_Description)
+							</div>
 
-						<hr />
+							<hr class="hrColor" />
+							<!-- Trigger/Open The Modal -->
+							<div class="displayMemoryBtn">
 
-						<div>
-							Memory Description
-							@Html.DisplayFor(Model => item.Memory_Description)
-						</div>
-
-						<!-- Trigger/Open The Modal -->
-						<div class="displayMemoryBtn">
-
-							<button class="displayMemoryBtnBackground" id="@memoryID" onClick="viewMemoryBtn(this.id)">
-								
-
-								@if((bool)frag.Is_Highlight == true)// ask why it fails under true, or just doesn't work in general
-								{
+								<button class="displayMemoryBtnBackground" id="@memoryID" onClick="viewMemoryBtn(this.id)">
 									<img class="memoryHighlight" src="@setImage">
-								}
-							</button>
 
-						</div>
+									@if ((bool)frag.Is_Highlight == true)// ask why it fails under true, or just doesn't work in general
+									{
+										//<img class="memoryHighlight" src="@setImage">
+									}
+								</button>
+
+							</div>
 
 
-						<!-- The Modal -->
-						<div id="theMemories_@memoryID" class="modal">
+							<!-- The Modal -->
+							<div id="theMemories_@memoryID" class="displayMemoryModal">
 
-							<!-- Modal content -->
-							<div class="modal-content">
-								<img class="memoryHighlight" src="@setImage"/>
-								@Html.DisplayFor(model => frag.Fragment_Location)
-								@Html.DisplayFor(model => frag.Fragment_Date)
-								@Html.DisplayFor(model => frag.Memory_Description)
+								<!-- Modal content -->
+								<div class="displayMemoryModal-content">
+									<span id="@memoryID" onClick="theMemoriesModalClose()" class="displayMemoryClose">&times;</span>
+									<div class="fragmentBlock">
 
-								<span id="@memoryID" onClick="theMemoriesModalClose()" class="close">&times;</span>
+										<button class="showFullImg" onclick="expandImg(this.id)" id="@setImage">
+											<img class="fragmentImg" src="@setImage" />
+										</button>
+
+										<div class="fragmentDescription">
+											<div>
+												@Html.DisplayFor(model => frag.Fragment_Location)
+											</div>
+											<div>
+												@Html.DisplayFor(model => frag.Fragment_Date)
+											</div>
+											<div>
+												@Html.DisplayFor(model => frag.Memory_Description)
+											</div>
+										</div>
+									</div>
+								</div>
+									<!-- The Modal -->
+								<div id="myImgModal_@setImage" class="ImgModal">
+
+									<!-- Modal Content (The Image) -->
+									<img class="ImgModal-content" id="img01">
+
+									<!-- The Close Button -->
+									<span onclick="imgModalClose()" class="close">&times;</span>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				}
 			}
 		}
 		<hr />
 	</div>
+
 	<!-- End of homepage memories -->
 
 </body>
 
 <script>
+
+	// Begin modal for Memories
 
 	// Get the modal
 	var theMemoriesModal;
@@ -104,6 +131,30 @@
 			theMemoriesModal.style.display = "none";
 		}
 	});
+
+	// End modal for Memories
+
+	// Begin modal for img expand
+
+	// Get the modal
+	var imgModal;
+
+	// Get the image and insert it inside the modal - use its "alt" text as a caption
+	var modalImg = document.getElementById("img01");
+
+	function expandImg(img) {
+		imgModal = document.getElementById("myImgModal_" + img);
+		imgModal.style.display = "block";
+		modalImg.src = img;
+		
+	}
+
+	// When the user clicks on <span> (x), close the modal
+	function imgModalClose() {
+		imgModal.style.display = "none";
+	}
+
+	// End modal for img expand
 
 </script>
 
