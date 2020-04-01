@@ -12,15 +12,14 @@ namespace Memcomb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Following
+    public partial class Message
     {
-        public int User_Following { get; set; }
-        public int User_Followed { get; set; }
+        public int Message_ID { get; set; }
+        public int Convo_ID { get; set; }
+        public int Message_Sender_ID { get; set; }
+        public string Message_Text { get; set; }
+        public System.DateTime DATETIME_SENT { get; set; }
     
-        public virtual User User { get; set; }
-
-        public string User_Followed_First_Name;
-
-        public string User_Followed_Last_Name;
+        public virtual Convo Convo { get; set; }
     }
 }

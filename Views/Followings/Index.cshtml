@@ -31,14 +31,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.User_Followed)
-            @{ 
-                switch(item.User_Followed)
-                {
-                   //change int to String 
-                }
-
-
-            }
+            @Html.DisplayFor(modelitem => item.User_Followed_First_Name)
+            @Html.DisplayFor(modelitem => item.User_Followed_Last_Name)
+           
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

@@ -12,15 +12,15 @@ namespace Memcomb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Following
+    public partial class Connection
     {
-        public int User_Following { get; set; }
-        public int User_Followed { get; set; }
+        public int Connection_ID { get; set; }
+        public int Fragment_One_ID { get; set; }
+        public int User_One_ID { get; set; }
+        public int Fragment_Two_ID { get; set; }
+        public int User_Two_ID { get; set; }
     
+        public virtual Fragment Fragment { get; set; }
         public virtual User User { get; set; }
-
-        public string User_Followed_First_Name;
-
-        public string User_Followed_Last_Name;
     }
 }

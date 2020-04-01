@@ -11,29 +11,22 @@ namespace Memcomb.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Web;
-
-    public partial class Fragment
+    
+    public partial class Convo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Fragment()
+        public Convo()
         {
-            this.Connections = new HashSet<Connection>();
+            this.Messages = new HashSet<Message>();
         }
     
-        public int Fragment_ID { get; set; }
-        public int Memory_ID { get; set; }
-        public Nullable<System.DateTime> Date_Posted { get; set; }
-        public System.DateTime Fragment_Date { get; set; }
-        public string Fragment_Location { get; set; }
-        public string Memory_Description { get; set; }
-        public string Fragment_Data { get; set; }
-        public bool Is_Highlight { get; set; }
-
-        public HttpPostedFileBase getImagePath { get; set; }
-
+        public int Convo_ID { get; set; }
+        public int User_Initiating_ID { get; set; }
+        public int User_Recieving_ID { get; set; }
+        public System.DateTime Convo_Start_Date { get; set; }
+    
+        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Connection> Connections { get; set; }
-        public virtual Memory Memory { get; set; }
+        public virtual ICollection<Message> Messages { get; set; }
     }
 }

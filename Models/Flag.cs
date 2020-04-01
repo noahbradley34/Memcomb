@@ -12,15 +12,11 @@ namespace Memcomb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Following
+    public partial class Flag
     {
-        public int User_Following { get; set; }
-        public int User_Followed { get; set; }
+        public int Memory_ID { get; set; }
+        public int User_ID { get; set; }
     
-        public virtual User User { get; set; }
-
-        public string User_Followed_First_Name;
-
-        public string User_Followed_Last_Name;
+        public virtual Memory Memory { get; set; }
     }
 }

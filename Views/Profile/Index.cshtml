@@ -1,35 +1,36 @@
-﻿@{
-    ViewBag.Title = "Profile";
+﻿@model IEnumerable<Memcomb.Models.Following>
+@{
+	ViewBag.Title = "Profile";
 }
 @{
-    WebImage photo = null;
-    var newFileName = "";
-    var imagePath = "";
-    if (IsPost)
-    {
-        photo = WebImage.GetImageFromRequest();
-        if (photo != null)
-        {
-            newFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(photo.FileName);
-            imagePath = @"Images\"+newFileName;
-            photo.Save(@"~\"+imagePath);
-        }
-    }
- }
-@{ 
-    WebImage Profilephoto = null;
-    var ProfileFileName = "";
-    var ProfilePath = "";
-    if (IsPost)
-    {
-        photo = WebImage.GetImageFromRequest();
-        if (Profilephoto != null)
-        {
-            ProfileFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(photo.FileName);
-            ProfilePath = @"Images\" + ProfileFileName;
-            Profilephoto.Save(@"~\" + ProfilePath);
-        }
-    }
+	WebImage photo = null;
+	var newFileName = "";
+	var imagePath = "";
+	if (IsPost)
+	{
+		photo = WebImage.GetImageFromRequest();
+		if (photo != null)
+		{
+			newFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(photo.FileName);
+			imagePath = @"Images\" + newFileName;
+			photo.Save(@"~\" + imagePath);
+		}
+	}
+}
+@{
+	WebImage Profilephoto = null;
+	var ProfileFileName = "";
+	var ProfilePath = "";
+	if (IsPost)
+	{
+		photo = WebImage.GetImageFromRequest();
+		if (Profilephoto != null)
+		{
+			ProfileFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(photo.FileName);
+			ProfilePath = @"Images\" + ProfileFileName;
+			Profilephoto.Save(@"~\" + ProfilePath);
+		}
+	}
 }
 
 <link href="@Url.Content("~/Content/Profile.css")" rel="stylesheet" type="text/css" />
@@ -37,27 +38,27 @@
 <head>
 	<div class="head">
 		<div class="banner">
-		@if (imagePath != "")
-		{
-			<div class="background-image">
-				<img src="@imagePath" />
-			</div>
-			<br />
-        }
-        else
-        {
-			<div class="background-image">Upload background image</div>
-        }
+			@if (imagePath != "")
+			{
+				<div class="background-image">
+					<img src="@imagePath" />
+				</div>
+				<br />
+			}
+			else
+			{
+				<div class="background-image">Upload background image</div>
+			}
 		</div>
 		<div class="spaceBetween">
 			@if (ProfilePath != "")
-            {
+			{
 				<img src="@ProfilePath" />
-            }
-            else
-            {
-			<img src="@Url.Content("~/Content/Images/facebookdefaultprofile.jpg")" />
-            }
+			}
+			else
+			{
+				<img src="@Url.Content("~/Content/Images/facebookdefaultprofile.jpg")" />
+			}
 			<!--<input type="file" onchange="loadImageFile(this)"/>-->
 			<form action="" method="post" enctype="multipart/form-data">
 				<input type="file" name="Image" />
@@ -82,7 +83,49 @@
 		<table>
 			<tr>
 				<td>
-					| 100 following
+					| 100
+					<button class="btn btn-primary" data-target="#followingsModal" data-toggle="modal">Followings</button>
+					<div class="modal fade" id="followingsModal" tabindex="-1">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Followers</h4>
+								</div>
+								<div class="modal-body">
+									<table class="table">
+										<tr>
+											<th>
+												User_Following
+											</th>
+											<th>
+												User_Followed
+											</th>
+											<th></th>
+										</tr>
+
+										@foreach (var item in Model)
+										{
+											<tr>
+												<td>
+													@Html.DisplayFor(modelItem => item.User_Following)
+													@Html.DisplayFor(modelItem => item.User.First_Name)
+													@Html.DisplayFor(modelItem => item.User.Last_Name)
+												</td>
+												<td>
+													@Html.DisplayFor(modelItem => item.User_Followed)
+													@Html.DisplayFor(modelitem => item.User_Followed_First_Name)
+													@Html.DisplayFor(modelitem => item.User_Followed_Last_Name)
+
+												</td>
+											</tr>
+										}
+
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
 				</td>
 				<td>
 					&nbsp;&nbsp;|&nbsp;&nbsp;

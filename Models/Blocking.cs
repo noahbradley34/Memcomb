@@ -12,15 +12,11 @@ namespace Memcomb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Following
+    public partial class Blocking
     {
-        public int User_Following { get; set; }
-        public int User_Followed { get; set; }
+        public int User_Doing_Blocking { get; set; }
+        public int User_Being_Blocked { get; set; }
     
         public virtual User User { get; set; }
-
-        public string User_Followed_First_Name;
-
-        public string User_Followed_Last_Name;
     }
 }
