@@ -1,5 +1,5 @@
 ﻿@using Memcomb;
-@model IEnumerable<Memcomb.Models.User>
+@model IEnumerable<Memcomb.Models.Memory>
 
 @{
 	ViewBag.Title = "Index";
@@ -11,10 +11,7 @@
 
 	<!-- Start of homepage memories -->
 	<div>
-
-		@foreach (var user in Model)
-		{
-			foreach (var mem in user.memoryList.Where(a => a.User_ID == user.User_ID).Reverse())
+			@foreach (var mem in Model.Reverse())
 			{
 				foreach (var frag in mem.fragmentList.Where(a => a.Memory_ID == mem.Memory_ID))
 				{
@@ -30,8 +27,8 @@
 							<span id="profileUserID_" class="profilePicAndUserName">
 								<img src="~/Images/memcombLogo.png" id="memoryHighlight" class="profilePic" /> <!-- Will eventually change the profile pic image source -->
 								<span class="userName">
-									@Html.DisplayFor(Model => user.First_Name)
-									@Html.DisplayFor(Model => user.Last_Name)
+									@Html.DisplayFor(Model => mem.getFirstName)
+									@Html.DisplayFor(Model => mem.getLastName)
 								</span>
 							</span>
 							<div class="memoryTitle">

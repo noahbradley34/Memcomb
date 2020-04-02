@@ -54,9 +54,12 @@ namespace Memcomb.Controllers
                     memoryList.Add(new Memory
                     {
                         User_ID = mem.User_ID,
+                        getFirstName = user.First_Name,
+                        getLastName = user.Last_Name,
                         Memory_ID = mem.Memory_ID,
                         Memory_Title = mem.Memory_Title,
                         Memory_Description = mem.Memory_Description,
+                        Date_Created = mem.Date_Created,
                         fragmentList = fragmentList
                     });
                 }   
@@ -70,8 +73,8 @@ namespace Memcomb.Controllers
                 });
             }
 
-            userList = userList.OrderBy(e => e.EstimatedDate).ThenBy(e => e.EstimatedTime).ToList();
-            return View(userList);
+            memoryList = memoryList.OrderBy(e => e.Date_Created).ToList();
+            return View(memoryList);
         }
         
         //Registration POST action
@@ -100,6 +103,7 @@ namespace Memcomb.Controllers
 
                         memoryIDForFolder = memoryIDForFolder + 1;
                         fragmentIDPath = fragmentIDPath + 1;
+
 
                         Memory newMemory = new Memory()
                         {
