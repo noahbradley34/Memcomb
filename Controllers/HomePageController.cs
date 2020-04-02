@@ -28,11 +28,13 @@ namespace Memcomb.Controllers
             List<Memory> memoryList = new List<Memory>();
             List<Fragment> fragmentList = new List<Fragment>();
 
+
             foreach (var u in db.Users)
             {
                 User user = db.Users.Find(u.User_ID);
- 
-                foreach (var item in db.Memories)
+
+                var m = db.Memories.Where(a => a.User_ID == u.User_ID);
+                foreach (var item in m)
                 {
                     Memory mem = db.Memories.Find(item.Memory_ID);
                 
@@ -51,6 +53,7 @@ namespace Memcomb.Controllers
                     }
                     memoryList.Add(new Memory
                     {
+                        User_ID = mem.User_ID,
                         Memory_ID = mem.Memory_ID,
                         Memory_Title = mem.Memory_Title,
                         Memory_Description = mem.Memory_Description,
@@ -60,11 +63,14 @@ namespace Memcomb.Controllers
 
                 userList.Add(new User
                 {
+                    User_ID = u.User_ID,
                     First_Name = u.First_Name,
                     Last_Name = u.Last_Name,
                     memoryList = memoryList
                 });
             }
+
+            userList = userList.OrderBy(e => e.EstimatedDate).ThenBy(e => e.EstimatedTime).ToList();
             return View(userList);
         }
         
@@ -98,6 +104,7 @@ namespace Memcomb.Controllers
                         Memory newMemory = new Memory()
                         {
                             User_ID = v.User_ID,
+                            Date_Created = DateTime.Now,
                             Memory_Title = model.Memory_Title,
                             Memory_Description = model.Memory_Description
                         };

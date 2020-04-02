@@ -12,9 +12,9 @@
 	<!-- Start of homepage memories -->
 	<div>
 
-		@foreach (var user in Model.Reverse())
+		@foreach (var user in Model)
 		{
-			foreach (var mem in user.memoryList.Where(a => a.User_ID == user.User_ID))
+			foreach (var mem in user.memoryList.Where(a => a.User_ID == user.User_ID).Reverse())
 			{
 				foreach (var frag in mem.fragmentList.Where(a => a.Memory_ID == mem.Memory_ID))
 				{
@@ -86,7 +86,7 @@
 								<div id="myImgModal_@setImage" class="ImgModal">
 
 									<!-- Modal Content (The Image) -->
-									<img class="ImgModal-content" id="img01">
+									<img class="ImgModal-content" id="img_@setImage">
 
 									<!-- The Close Button -->
 									<span onclick="imgModalClose()" class="close">&times;</span>
@@ -140,10 +140,11 @@
 	var imgModal;
 
 	// Get the image and insert it inside the modal - use its "alt" text as a caption
-	var modalImg = document.getElementById("img01");
+	var modalImg;
 
 	function expandImg(img) {
 		imgModal = document.getElementById("myImgModal_" + img);
+		modalImg = document.getElementById("img_" + img);
 		imgModal.style.display = "block";
 		modalImg.src = img;
 		
