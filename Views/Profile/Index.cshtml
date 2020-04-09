@@ -42,6 +42,8 @@
 						<div class="form-inline">
 							@Html.TextBoxFor(model => model.Profile_Picture_imgPath, new { @class = "form-control", type = "file", id = "imageBrowes" })
 							<input type="submit" name="uploadProfile" value="Upload Profile" />
+							<input type="file" name="Edit Profile Image" id="profileImage" accept=".png,.jpg,.jpeg,.gif,.tif,.jfif" />
+							<input type="submit" name="uploadProfile" value="Upload Profile"/>
 						</div>
 					</div>
 				}
@@ -67,6 +69,8 @@
 						<div class="form-inline">
 							@Html.TextBoxFor(model => model.Background_Photo, new { @class = "form-control", type = "file", id = "imageBrowes" })
 							<input type="submit" name="uploadBackground" value="Upload Background" />
+							<input type="file" name="Edit Background Image" id="backgroundImage" accept=".png,.jpg,.jpeg,.gif,.tif,.jfif" />
+							<input type="submit" name="uploadBackground" value="Upload Background"/>
 						</div>
 					</div>
 				}
