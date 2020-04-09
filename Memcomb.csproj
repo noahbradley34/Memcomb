@@ -205,6 +205,13 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\LogInPageBackground.png" />
     <Content Include="Images\memcombLogo.png" />
+    <Content Include="Memories\User_ID_23\Memory_ID_1015\14_cursed fish.jfif" />
+    <Content Include="Memories\User_ID_23\Memory_ID_10\9_giants2.jfif" />
+    <Content Include="Memories\User_ID_23\Memory_ID_11\10_giants2.jfif" />
+    <Content Include="Memories\User_ID_23\Memory_ID_12\11_giants2.jfif" />
+    <Content Include="Memories\User_ID_23\Memory_ID_13\12_hat.jpg" />
+    <Content Include="Memories\User_ID_23\Memory_ID_14\13_image3.jfif" />
+    <Content Include="Memories\User_ID_23\Memory_ID_9\8_giants2.jfif" />
     <Content Include="Models\memcombDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>memcombDB.edmx</DependentUpon>
@@ -239,6 +246,18 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Users\User_ID_20\Profile_Pic\book.jpg" />
+    <Content Include="Users\User_ID_23\Background_ID_1\1_51B0HD4q3xL._SX332_BO1,204,203,200_.jpg" />
+    <Content Include="Users\User_ID_23\Background_Pic\51B0HD4q3xL._SX332_BO1,204,203,200_.jpg" />
+    <Content Include="Users\User_ID_23\Background_Pic\book.jpg" />
+    <Content Include="Users\User_ID_23\Background_Pic\Carrot.png" />
+    <Content Include="Users\User_ID_23\Profile_ID_1\1_37153047_1543093035795479_5413491610124025856_n.jpg" />
+    <Content Include="Users\User_ID_23\Profile_ID_1\1_51B0HD4q3xL._SX332_BO1,204,203,200_.jpg" />
+    <Content Include="Users\User_ID_23\Profile_Pic\37153047_1543093035795479_5413491610124025856_n.jpg" />
+    <Content Include="Users\User_ID_23\Profile_Pic\48414811_1748857428552371_350185352410955776_n.jpg" />
+    <Content Include="Users\User_ID_23\Profile_Pic\51B0HD4q3xL._SX332_BO1,204,203,200_.jpg" />
+    <Content Include="Users\User_ID_23\Profile_Pic\birthday invite.jpeg" />
+    <Content Include="Users\User_ID_23\Profile_Pic\book.jpg" />
     <Content Include="Views\Image\profiletemplate.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -263,9 +282,11 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Memories\UserID\MemoryID\" />
+    <Folder Include="Memories\User_ID32\" />
     <Folder Include="Queries\" />
     <Folder Include="Users\UserID\BackgroundID\" />
     <Folder Include="Users\UserID\ProfileID\" />
+    <Folder Include="Users\User_ID_20\Background_Pic\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -5,19 +5,32 @@ using System.Web;
 using System.Web.Mvc;
 using System.IO;
 using Memcomb.Models;
+using System.Data.Entity.Validation;
+
 namespace Memcomb.Controllers
 {
     public class ProfileController : Controller
     {
         // GET: Profile
-        public ActionResult Index()
+        public ActionResult Index(User profiler)
         {
-            return View();
+            memcombdbEntities db = new memcombdbEntities();
+            //ProfilePageModel profiler = new ProfilePageModel();
+            foreach (var u in db.Users)
+            {
+                profiler.First_Name = u.First_Name;
+                profiler.Last_Name = u.Last_Name;
+                profiler.Profile_Picture = u.Profile_Picture;
+                profiler.Profile_Picture_imgPath = u.Profile_Picture_imgPath;
+                profiler.Background_Photo = u.Background_Photo;
+                profiler.Background_Pic = u.Background_Pic;
+            }
+            return View(profiler);
         }
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(ProfilePageModel model, string id)
+        public ActionResult ProfilePicture(User model)
         {
             bool Status = false;
             string message = "";
@@ -29,45 +42,107 @@ namespace Memcomb.Controllers
                     {
                         HttpCookie cookie = HttpContext.Request.Cookies.Get("userIDCookie");
                         var v = dc.Users.Where(a => a.Email_ID == cookie.Value).FirstOrDefault();
-                        if (id == "profileImage")
+                        Directory.CreateDirectory(Server.MapPath("~/Users/User_ID_" + v.User_ID + "/Profile_Pic"));
+                        HttpPostedFileBase file = model.Profile_Picture_imgPath;
+                        if (file.ContentLength > 0)
                         {
-                            string ProfileIDPath = dc.Users.Max(u => u.Profile_Picture);
-                            string ProfileDirectory = dc.Users.Max(u => u.Profile_Picture);
-                            ProfileDirectory = ProfileDirectory + 1;
-                            ProfileIDPath = ProfileIDPath + 1;
-                            Directory.CreateDirectory(Server.MapPath("~/Users/User_ID_" + v.User_ID + "/Profile_ID_" + ProfileDirectory));
-                            HttpPostedFileBase file = model.user.Profile_Picture_imgPath;
-                            if (file.ContentLength > 0)
-                            {
-                                var fileName = Path.GetFileName(file.FileName);
-                                var path = Path.Combine(Server.MapPath("~/Users/User_ID_" + v.User_ID + "/Profile_ID_" + ProfileDirectory), ProfileIDPath + "_" + fileName);
-                                file.SaveAs(path);
-                                model.user.Profile_Picture = path;
-                            }
+                            var fileName = Path.GetFileName(file.FileName);
+                            var path = Path.Combine(Server.MapPath("~/Users/User_ID_" + v.User_ID + "/Profile_Pic"), fileName);
+                            file.SaveAs(path);
+                            /*model.User_ID = v.User_ID;
+                            model.First_Name = v.First_Name;
+                            model.Last_Name = v.Last_Name;
+                            model.Email_ID = v.Email_ID;
+                            model.Password = v.Password;*/
+                            v.Profile_Picture = path;
+                            //model.Background_Pic = v.Background_Pic;*/
+                      
                         }
-                        if (id == "backgroundImage")
+                        dc.Users.Include(v.Profile_Picture);
+                       // try
+                        //{
+                            dc.SaveChanges();
+                        //}
+                        /*catch (DbEntityValidationException ex)
                         {
-                            string BackgroundIDPath = dc.Users.Max(u => u.Background_Pic);
-                            string BackgroundDirectory = dc.Users.Max(u => u.Background_Pic);
-                            BackgroundDirectory = BackgroundDirectory + 1;
-                            BackgroundIDPath = BackgroundIDPath + 1;
-                            Directory.CreateDirectory(Server.MapPath("~/Users/User_ID_" + v.User_ID + "/Background_ID_" + BackgroundDirectory));
-                            HttpPostedFileBase file1 = model.user.Background_Photo;
-                            if (file1.ContentLength > 0)
-                            {
-                                var fileName = Path.GetFileName(file1.FileName);
-                                var path = Path.Combine(Server.MapPath("~/Users/User_ID_" + v.User_ID + "/Background_ID_" + BackgroundDirectory), BackgroundIDPath + "_" + fileName);
-                                file1.SaveAs(path);
-                                model.user.Background_Pic = path;
-                            }
-                        }
-                        dc.Users.Add(model.user);
-                        dc.SaveChanges();
+                            // Retrieve the error messages as a list of strings.
+                            var errorMessages = ex.EntityValidationErrors
+                                    .SelectMany(x => x.ValidationErrors)
+                                    .Select(x => x.ErrorMessage);
+
+                            // Join the list to a single string.
+                            var fullErrorMessage = string.Join("; ", errorMessages);
+
+                            // Combine the original exception message with the new one.
+                            var exceptionMessage = string.Concat(ex.Message, " The validation errors are: ", fullErrorMessage);
+
+                            // Throw a new DbEntityValidationException with the improved exception message.
+                            throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
+                        }*/
                         Status = true;
                     }
                 }
             }
-            return View();
+            else
+            {
+                message = "Invalid request";
+            }
+            return RedirectToAction("Index", model);
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult BackgroundPicture(User model)
+        {
+            bool Status = false;
+            string message = "";
+            if (ModelState.IsValid)
+            {
+                using (memcombdbEntities dc = new memcombdbEntities())
+                {
+                    if (HttpContext.Request.Cookies["userIDCookie"] != null)
+                    {
+                        HttpCookie cookie = HttpContext.Request.Cookies.Get("userIDCookie");
+                        var v = dc.Users.Where(a => a.Email_ID == cookie.Value).FirstOrDefault();
+                        Directory.CreateDirectory(Server.MapPath("~/Users/User_ID_" + v.User_ID + "/Background_Pic"));
+                        HttpPostedFileBase file = model.Background_Photo;
+                        if (file.ContentLength > 0)
+                        {
+                            var fileName = Path.GetFileName(file.FileName);
+                            var path = Path.Combine(Server.MapPath("~/Users/User_ID_" + v.User_ID + "/Background_Pic"), fileName);
+                            file.SaveAs(path);
+                            v.Background_Pic = path;
+                        }
+                        dc.Users.Include(v.Background_Pic);
+                        try
+                        {
+                            dc.SaveChanges();
+                        }
+                        catch (DbEntityValidationException ex)
+                        {
+                            // Retrieve the error messages as a list of strings.
+                            var errorMessages = ex.EntityValidationErrors
+                                    .SelectMany(x => x.ValidationErrors)
+                                    .Select(x => x.ErrorMessage);
+
+                            // Join the list to a single string.
+                            var fullErrorMessage = string.Join("; ", errorMessages);
+
+                            // Combine the original exception message with the new one.
+                            var exceptionMessage = string.Concat(ex.Message, " The validation errors are: ", fullErrorMessage);
+
+                            // Throw a new DbEntityValidationException with the improved exception message.
+                            throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
+                        }
+                        Status = true;
+                    }
+                }
+            }
+            else
+            {
+                message = "Invalid request";
+            }
+            return RedirectToAction("Index", model);
         }
         // GET: Profile/Details/5
         public ActionResult Details(int id)
@@ -75,14 +150,6 @@ namespace Memcomb.Controllers
             return View();
         }
         [HttpPost]
-        /* ActionResult Upload(HttpPostedFileBase file) {
-                if (file != null && file.ContentLength > 0) {
-                    var fileName = Path.GetFileName(file.FileName);
-                    var path = Path.Combine(Server.MapPath("~/Images/"), fileName);
-                    file.SaveAs(path);
-                }
-            return RedirectToAction("Index");
-        }*/
         // GET: Profile/Create
         public ActionResult Create()
         {
@@ -148,78 +215,5 @@ namespace Memcomb.Controllers
                 return View();
             }
         }
-
-       /* [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult ProfilePic(ProfilePageModel model)
-        {
-            bool Status = false;
-            string message = "";
-            if (ModelState.IsValid)
-            {
-                using (memcombdbEntities dc = new memcombdbEntities())
-                {
-                    if (HttpContext.Request.Cookies["userIDCookie"] != null)
-                    {
-                        HttpCookie cookie = HttpContext.Request.Cookies.Get("userIDCookie");
-                        var v = dc.Users.Where(a => a.Email_ID == cookie.Value).FirstOrDefault();
-                        string ProfileIDPath = dc.Users.Max(u => u.Profile_Picture);
-                        string ProfileDirectory = dc.Users.Max(u => u.Profile_Picture);
-                        ProfileDirectory = ProfileDirectory + 1;
-                        ProfileIDPath = ProfileIDPath + 1;
-                        Directory.CreateDirectory(Server.MapPath("~/Users/User_ID_" + v.User_ID + "/Profile_ID_" + ProfileDirectory));
-                        HttpPostedFileBase file = model.user.Profile_Picture_imgPath;
-                        if (file.ContentLength > 0)
-                        {
-                            var fileName = Path.GetFileName(file.FileName);
-                            var path = Path.Combine(Server.MapPath("~/Users/User_ID_" + v.User_ID + "/Profile_ID_" + ProfileDirectory), ProfileIDPath + "_" + fileName);
-                            file.SaveAs(path);
-                            model.user.Profile_Picture = path;
-                        }
-                        dc.Users.Add(model.user);
-                        dc.SaveChanges();
-                        Status = true;
-                    }
-                }
-            }
-            return View("Index", model);
-        }
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult BackgroundPic(ProfilePageModel model)
-        {
-            bool Status = false;
-            string message = "";
-            if (ModelState.IsValid)
-            {
-                using (memcombdbEntities dc = new memcombdbEntities())
-                {
-                    if (HttpContext.Request.Cookies["userIDCookie"] != null)
-                    {
-                        HttpCookie cookie = HttpContext.Request.Cookies.Get("userIDCookie");
-                        var v = dc.Users.Where(a => a.Email_ID == cookie.Value).FirstOrDefault();
-                        string BackgroundIDPath = dc.Users.Max(u => u.Background_Pic);
-                        string BackgroundDirectory = dc.Users.Max(u => u.Background_Pic);
-                        BackgroundDirectory = BackgroundDirectory + 1;
-                        BackgroundIDPath = BackgroundIDPath + 1;
-                        Directory.CreateDirectory(Server.MapPath("~/Users/User_ID_" + v.User_ID + "/Background_ID_" + BackgroundDirectory));
-                        HttpPostedFileBase file1 = model.user.Background_Photo;
-                        if (file1.ContentLength > 0)
-                        {
-                            var fileName = Path.GetFileName(file1.FileName);
-                            var path = Path.Combine(Server.MapPath("~/Users/User_ID_" + v.User_ID + "/Background_ID_" + BackgroundDirectory), BackgroundIDPath + "_" + fileName);
-                            file1.SaveAs(path);
-                            model.user.Background_Pic = path;
-                        }
-                        dc.Users.Add(model.user);
-                        dc.SaveChanges();
-                        Status = true;
-                    }
-                }
-            }
-            return View("Index", model);
-        }*/
     }
 }
