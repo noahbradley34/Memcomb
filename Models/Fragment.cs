@@ -34,5 +34,10 @@ namespace Memcomb.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Connection> Connections { get; set; }
         public virtual Memory Memory { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Connection> Connections { get; set; }
+        public virtual Memory Memory { get; set; }
+
+        public HttpPostedFileBase getImagePath { get; set; }
     }
 }
