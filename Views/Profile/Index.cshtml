@@ -4,10 +4,10 @@
 @model Memcomb.Models.User
 <link href="@Url.Content("~/Content/Profile.css")" rel="stylesheet" type="text/css" />
 <head>
-	<div class="head">
+	<div class="head" style="align-content: center; width: 80%; margin: auto">
 		<div>
 			<div>
-				<img class="background-image" src="@Url.Action(Model.Background_Pic)" style="margin:auto; padding: 6px;" />
+				<img class="background-image" src="@Url.Action(Model.Background_Pic)" style="padding: 6px;" />
 			</div>
 			<br />
 		</div>
@@ -18,17 +18,12 @@
 					-moz-border-radius: 60px;
 					border-radius: 100px;
 					padding: 6px;
+					background-color: orangered;
 					box-shadow: 0px 0px 20px #ff6a00;" />
 			</div>
 			<br />
 		</div>
 		<h1>
-			<!--<img src="@Url.Action("Index", "Profile")" style="width:160px; height:160px;
-					margin: auto;
-					-moz-border-radius: 60px;
-					border-radius: 100px;
-					padding: 6px;
-					box-shadow: 0px 0px 20px #ff6a00;" />-->
 		</h1>
 		<div class="spaceBetween">
 			<div>
@@ -40,8 +35,10 @@
 					@Html.AntiForgeryToken()
 					<div class="form-group">
 						<div class="form-inline">
+							<div>
 							@Html.TextBoxFor(model => model.Profile_Picture_imgPath, new { @class = "form-control", type = "file", id = "imageBrowes" })
-							<input type="submit" name="uploadProfile" value="Upload Profile" />
+							</div>
+							<input type="submit" name="uploadProfile" value="Upload Profile" style="color: saddlebrown; background-color: yellow; border-color: saddlebrown"/>
 						</div>
 					</div>
 				}
@@ -65,23 +62,25 @@
 					@Html.AntiForgeryToken()
 					<div class="form-group">
 						<div class="form-inline">
-							@Html.TextBoxFor(model => model.Background_Photo, new { @class = "form-control", type = "file", id = "imageBrowes" })
-							<input type="submit" name="uploadBackground" value="Upload Background" />
+							<div>
+							@Html.TextBoxFor(model => model.Background_Photo, new { @class = "form-control", type = "file", id = "imageBrowes"})
+							</div>
+							<input type="submit" name="uploadBackground" value="Upload Background" style="color: saddlebrown; background-color: yellow; border-color: saddlebrown"/>
 						</div>
 					</div>
 				}
 			</div>
 		</div>
 		<diV>
-			<h1>User Name</h1>
+			<h1 style="color: yellow; font: bold">@Model.First_Name @Model.Last_Name</h1>
 		</diV>
 		<div>
-			<p>Bio</p>
+			<p>@Model.Biography</p>
 		</div>
 	</div>
 
 	<div class="followerRow">
-		<table>
+		<table style="color: darkorange; margin-left: 90px">
 			<tr>
 				<td>
 					| 100 following
@@ -102,18 +101,6 @@
 		</table>
 	</div>
 </head>
-
-<body>
-	<div>
-		<p>
-			<form class="posts" action="" method="post">
-				<input class="text-box" type="text" name="Posts" /> <br />
-				<input class="post-btn" type="submit" value="Post" />
-			</form>
-		</p>
-	</div>
-</body>
-
 <div class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container">
 		<div class="navbar-header">
