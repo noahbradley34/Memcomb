@@ -40,8 +40,5 @@ namespace Memcomb.Models
         public virtual User User { get; set; }
         public List<Fragment> fragmentList { get; set; }
         public Fragment Fragment { get; set; }
-
-        public string getFirstName { get; set; }
-        public string getLastName { get; set; }
     }
 }
