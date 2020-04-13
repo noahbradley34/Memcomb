@@ -16,8 +16,19 @@ namespace Memcomb.Controllers
         // GET: Profile
         public ActionResult Index()
         {
-           
-            return View();
+            List<Following> followingList = new List<Following>();
+            using (memcombdbEntities db = new memcombdbEntities())
+            {
+                if (HttpContext.Request.Cookies["userIDCookie"] != null)
+                {
+                    HttpCookie cookie = HttpContext.Request.Cookies.Get("userIDCookie");
+                    var v = db.Users.Where(a => a.Email_ID == cookie.Value).FirstOrDefault();
+                    var data = db.Followings.Include(f => f.User);
+
+                    return View(data.ToList());
+                }
+            }
+                return View();
         }
         // GET: Profile/Details/5
         public ActionResult Details(int id)
@@ -35,7 +46,7 @@ namespace Memcomb.Controllers
         }
 
         // GET: Followings/Email_ID
-        public ActionResult Index(String id)
+        public ActionResult Followings_modal(String id)
         {
             using (memcombdbEntities db = new memcombdbEntities())
             {
@@ -47,16 +58,16 @@ namespace Memcomb.Controllers
 
                     var data = db.Followings.Include(f => f.User).Where(f => f.User.Email_ID == id);
 
-                    var followed_user = db.Followings.Where(a => a.User_Followed == v.User_ID).FirstOrDefault();
+                   // var followed_user = db.Followings.Where(a => a.User_Followed == v.User_ID).FirstOrDefault();
 
-                    var get_UserID = db.Followings.Where(a => a.User_Followed == v.User_ID).FirstOrDefault();
+                   // var get_UserID = db.Followings.Where(a => a.User_Followed == v.User_ID).FirstOrDefault();
 
 
                     var first_name = "default f_name";
 
                     var last_name = "default l_name";
 
-                    var new_following = new Following()
+                    /*var new_following = new Following()
                     {
                         User_Following = get_UserID.User_Following,
                         User_Followed = get_UserID.User_Followed,
@@ -70,7 +81,7 @@ namespace Memcomb.Controllers
                         (x, y) => new {
                             User_First_Name = x.First_Name,
                             User_Last_Name = x.Last_Name
-                        });
+                        }); */
 
                     return View(data);
                 }
@@ -78,7 +89,7 @@ namespace Memcomb.Controllers
                 {
                     var followings = db.Followings.Include(f => f.User);
 
-                    return View(followings);
+                    return View(followings.ToList());
                 }
             }
             

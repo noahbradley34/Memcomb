@@ -36,6 +36,7 @@ namespace Memcomb.Models
         public bool Is_Verified { get; set; }
         public string Activation_Code { get; set; }
         public bool Is_Admin { get; set; }
+        public string Background_Pic { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Connection> Connections { get; set; }

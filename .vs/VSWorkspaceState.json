@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Memories"
+    "\\Controllers",
+    "\\Views",
+    "\\Views\\Followings",
+    "\\Views\\Profile"
   ],
   "SelectedNode": "\\Memcomb.sln",
   "PreviewInSolutionExplorer": false

@@ -19,8 +19,8 @@ namespace Memcomb.Models
     
         public virtual User User { get; set; }
 
-        public string User_Followed_First_Name;
+        public string User_Followed_First_Name { get; set; }
+        public string User_Followed_Last_Name { get; set; }
 
-        public string User_Followed_Last_Name;
     }
 }

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Memcomb.Models.Following>
+
+    <link href="@Url.Content("~/Content/HomePage.css")" rel="stylesheet" type="text/css" />
+
+    <body>
+
+        <div class="modal fade" id="followingsModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Followers</h4>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    User_Following
+                                </th>
+                                <th>
+                                    User_Followed
+                                </th>
+                                <th></th>
+                            </tr>
+                            @if (Model != null)
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.User_Following)
+                                            @Html.DisplayFor(modelItem => item.User.First_Name)
+                                            @Html.DisplayFor(modelItem => item.User.Last_Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.User_Followed)
+                                        </td>
+                                    </tr>
+                                }
+                            }
+
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
