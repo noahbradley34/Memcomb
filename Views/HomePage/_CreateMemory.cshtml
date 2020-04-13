@@ -3,112 +3,63 @@
 @model Memcomb.Models.Memory
 @using Memcomb.Models
 
-	<link href="@Url.Content("~/Content/HomePage.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/HomePage.css")" rel="stylesheet" type="text/css" />
 
-	<script src="~/Scripts/CustomJs.js"></script>
+<script src="~/Scripts/CustomJs.js"></script>
 
-	<body>
-		<!-- Create Memory Modal -->
+<body>
+	<!-- Create Memory Modal -->
+	<!-- Trigger/Open The Modal -->
+	<button id="myBtn" class="createMemoryBtn">Create Memory</button>
 
-			<!-- Trigger/Open The Modal -->
-			<button id="myBtn" class="createMemoryBtn">Create Memory</button>
+	<!-- The Modal -->
+	<div id="myModal" class="createMemoryModal">
 
-			<!-- The Modal -->
-			<div id="myModal" class="modal">
+		<!-- Modal content -->
+		<div class="createMemoryModal-content">
 
-				<!-- Modal content -->
-				<div class="modal-content">
-					@using (Html.BeginForm("Index", "HomePage", FormMethod.Post, new { enctype = "multipart/form-data" }))
-					{
-						@Html.AntiForgeryToken()
+			@using (Html.BeginForm("Index", "HomePage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+			{
+				@Html.AntiForgeryToken()
 
-						<div class="col-md-12">
-							<div class="form-horizontal">
-								<div class="form-group col-md-12">
-									@Html.EditorFor(model => model.Memory_Title, new { htmlAttributes = new { @class = "form-control", placeholder = "Memory Title" } })
-									@Html.EditorFor(model => model.Memory_Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Memory Description" } })
-								</div>
-								<div class="form-group col-md-12">
-									<div class="form-inline">
-										<div class="btn btn-primary">
-											@Html.TextBoxFor(model => model.Fragment.getImagePath, new { @class = "form-control", type = "file", id = "imageBrowes" })
-										</div>
-										<span>
-											<input type="submit" value="Post Memory!" class="btn" />
-										</span>
-										<span id="createMemoryClose" class="close">&times;</span>
-									</div>
-									<div>
-										<input type="button" id="button" onclick="duplicate()" value="Add Another Image" class="btn" />
-									</div>
-
-									<hr />
-								</div>
-								<div class="form-inline">
-									<div id="duplicator" class="form-group col-md-3">
-										<div id="imgPreview" class="thumbnail" style="display:none">
-											<img id="targetImg" class="img-responsive" />
-											<div class="caption">
-												@Html.EditorFor(model => model.Fragment.Fragment_Location, new { htmlAttributes = new { @class = "form-control", id = "memoryLocation", placeholder = "City, State" } })<!--<input type="text" id="memoryLocation" placeholder="City, State" />-->
-												@Html.EditorFor(model => model.Fragment.Fragment_Date, new { htmlAttributes = new { @class = "form-control", id = "memoryDate", placeholder = "mm/dd/yyyy" } })
-												@Html.EditorFor(model => model.Fragment.Memory_Description, new { htmlAttributes = new { @class = "form-control", id = "memoryCaption", placeholder = "Caption" } })
-												<br /><span id="highlight">Make this your highlight? @Html.EditorFor(model => model.Fragment.Is_Highlight)</span><br />
-												<a href="#" onclick="ClearPreview()"><i class="glyphicon glyphicon-trash"></i></a>
-												<span id="description"></span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-				<div class="createMemoryModal-content">
-
-					@using (Html.BeginForm("Index", "HomePage", FormMethod.Post, new { enctype = "multipart/form-data" }))
-					{
-						@Html.AntiForgeryToken()
-					
-						<div class="btn postMemoryBtn">
-							@Html.AddLink("Add Fragment", "#fragmentsAdder", ".fragmenttts", "Fragments", typeof(Memcomb.Models.Fragment))
-						</div>
-						<span>
-							<input type="submit" value="Post Memory" class="btn postMemoryBtn" />
-						</span>
-						
-						
-						@Html.EditorForModel()
-					}
+				<div class="btn postMemoryBtn">
+					@Html.AddLink("Add Fragment", "#fragmentsAdder", ".fragmenttts", "Fragments", typeof(Memcomb.Models.Fragment))
 				</div>
-			</div>
-		<!-- End Of Create Memory Modal -->
-	</body>
+				<span>
+					<input type="submit" value="Post Memory" class="btn postMemoryBtn" />
+				</span>
 
 
-	<script>
-		
-		// Get the modal
-		var modal = document.getElementById("myModal"); // Create Memory Modal
+				@Html.EditorForModel()
 
-		// Get the button that opens the modal
-		var btn = document.getElementById("myBtn"); // Create Memory Modal
 
-		// Get the <span> element that closes the modal
-		var span = document.getElementById("createMemoryClose");
+			}
+		</div>
+	</div>
+	<!-- End Of Create Memory Modal -->
+</body>
 
-		// When the user clicks the button, open the modal
-		btn.onclick = function () {
-			modal.style.display = "block";
-		}
 
-		// When the user clicks on <span> (x), close the modal
-		span.onclick = function () {
+<script>
+
+	// Get the modal
+	var modal = document.getElementById("myModal"); // Create Memory Modal
+	// Get the button that opens the modal
+	var btn = document.getElementById("myBtn"); // Create Memory Modal
+	// Get the <span> element that closes the modal
+	var span = document.getElementById("createMemoryClose");
+	// When the user clicks the button, open the modal
+	btn.onclick = function () {
+		modal.style.display = "block";
+	}
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function () {
+		modal.style.display = "none";
+	}
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function (event) {
+		if (event.target == modal) {
 			modal.style.display = "none";
 		}
-
-		// When the user clicks anywhere outside of the modal, close it
-		window.onclick = function (event) {
-			if (event.target == modal) {
-				modal.style.display = "none";
-			}
-		}
-
-	</script>
+	}
+</script>

@@ -11,53 +11,6 @@
 
 	<!-- Start of homepage memories -->
 	<div>
-		@foreach (var item in Model.Reverse())
-		{
-			foreach (var frag in item.fragmentList.Where(a => a.Memory_ID == item.Memory_ID))
-			{
-
-				var res = frag.Fragment_Data.Replace(@"C:\Users\Jzhan\Documents\GitHub\Memcomb", ""); //Need to set this to work for server
-				var setImage = res.Replace(@"\", "/");
-				var memoryID = frag.Memory_ID;
-				<div>
-					<hr />
-
-					<div class="displayMemoryBackground">
-
-						<span id="profileUserID_" class="profilePicAndUserName">
-							<img src="~/Images/memcombLogo.png" id="memoryHighlight" class="profilePic" /> <!-- Will eventually change the profile pic image source -->
-							<span class="userName">User Name</span>
-							<span>
-								Memory Title
-							</span>
-						</span>
-
-						<hr />
-
-						<div>
-							Memory Description
-							@Html.DisplayFor(Model => item.Memory_Description)
-						</div>
-
-						<!-- Trigger/Open The Modal -->
-						<div class="displayMemoryBtn">
-
-							<button class="displayMemoryBtnBackground" id="memoryID"><img class="memoryHighlight" src="@setImage"></button>
-
-						</div>
-
-
-						<!-- The Modal -->
-						<div id="theMemories" class="modal">
-
-							<!-- Modal content -->
-							<div class="modal-content">
-
-								<span id="viewMemoryClose" class="close">&times;</span>
-							</div>
-						</div>
-					</div>
-				</div>
 		@foreach (var mem in Model.Reverse())
 		{
 			var memoryID = mem.Memory_ID;
@@ -85,41 +38,15 @@
 
 				</div>
 			</div>
-			}
+
+		}
 		<hr />
 	</div>
+
 	<!-- End of homepage memories -->
 
 </body>
-<script>
 
-	// Get the modal
-	var theMemoriesModal = document.getElementById("theMemories"); // View Memory Modal
-
-	// Get the button that opens the modal
-	var viewMemoryBtn = document.getElementById("memoryID"); // View Memory Modal
-
-	// Get the <span> element that closes the modal
-	var theMemoriesModalClose = document.getElementById("viewMemoryClose");
-
-	// When the user clicks the button, open the modal
-	viewMemoryBtn.onclick = function () {
-		theMemoriesModal.style.display = "block";
-	}
-
-	// When the  user clicks on <span> (x), close the modal
-	theMemoriesModalClose.onclick = function () {
-		theMemoriesModal.style.display = "none";
-	}
-
-	// When the user clicks anywhere outside of the modal, close it
-	window.onclick = function (event) {
-		if (event.target == theMemoriesModal) {
-			theMemoriesModal.style.display = "none";
-		}
-	}
-
-</script>
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
@@ -149,10 +76,9 @@
 						Html.RenderPartial("_CreateMemory", memory);
 
 
-						}
+					}
 				</li>
 			</ul>
 		</div>
 	</div>
 </div>
-
