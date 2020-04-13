@@ -30,7 +30,118 @@
 	border-radius: 4px;
 	box-sizing: border-box;
 }
+.postMemoryBtn {
+	height: 50px;
+	background-color: #F9E779;
+	font-weight: bold;
+	color: rgba(113,18,3,1);
+	border: 2px solid rgba(113,18,3,1);
+}
 
+.chooseImgBtn {
+	height: auto;
+	background-color: #F9E779;
+	font-weight: bold;
+	color: rgba(113,18,3,1);
+	border: 2px solid rgba(113,18,3,1);
+}
+
+.blockForMemoryChooseImgAndPost{
+	margin-left: 10px
+}
+
+.blockForMemoryTitleAndDesc {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+	text-align: center;
+	width: 100%;
+	background-color: #F9E779;
+	font-weight: bold;
+	font-size: 15px;
+	border-radius: 8px;
+	color: rgba(113,18,3,1);
+}
+
+/* Begin of Image Preview */
+
+.imgPreview{
+	width: 300px
+}
+
+.imgPreviewBlock {
+	margin: 20px;
+	width: 350px;
+	padding: 10px;
+	background-color: #F9E779;
+	border: 10px solid rgba(113,18,3,1);
+	border-radius: 8px;
+	font-weight:bold;
+}
+
+.previewFragmentImg {
+	width: 300px;
+	background-color: rgba(113,18,3,1);
+	border-radius: 8px;
+}
+
+.imgPreviewDescription {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+	text-align: center;
+	width: 100%;
+	background-color: #F9E779;
+	font-weight: bold;
+	font-size: 15px;
+	border-radius: 8px;
+}
+
+/* End of Image Preview */
+
+/* The Modal (background) */
+.createMemoryModal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	padding-top: 100px; /* Location of the box */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.createMemoryModal-content {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	background-color: #F9E779;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%;
+	height: 80%;
+	border-radius: 25px;
+	overflow-y: auto;
+}
+
+/* The Close Button */
+.createMemoryClose {
+	color: #aaaaaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+/* End Create Memory Btn Modal*/
+/* End Create Memory Btn */
+
+/* Begin Display Memory */
 .displayMemoryBackground {
 	border-radius: 25px;
 	width: 100%;
@@ -77,6 +188,87 @@
 	clip-path: circle(200px);
 	overflow: hidden;
 }
+
+/* Begin Display Memory Modal Content */
+
+.fragmentBlock {
+	margin:5px;
+	width: 340px;
+	padding: 10px;
+	background-color: rgba(113,18,3,1);
+	border-radius: 8px;
+}
+
+.fragmentImg {
+	width: 300px;
+	clip-path: inset(100px, 0px, 100px, 0px);
+	background-color: rgba(113,18,3,1);
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+.fragmentDescription {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+	text-align: center;
+	width: 100%;
+	background-color: #F9E779;
+	font-weight: bold;
+	font-size: 15px;
+	border-radius: 8px;
+}
+
+.showFullImg {
+	background-color: rgba(113,18,3,1);
+	border: rgba(113,18,3,1);
+}
+
+/* The Modal (background) */
+.displayMemoryModal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	padding-top: 100px; /* Location of the box */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.displayMemoryModal-content {
+	text-align: center;
+	background-color: #F9E779;
+	margin: auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%;
+	height: 80%;
+	border-radius: 25px;
+	overflow-y:auto;
+}
+
+/* The Close Button */
+.displayMemoryClose {
+	color: #aaaaaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+/* End Display Memory Modal Content */
+
+/* End Display Memory Modal Btn */
+.hrColor {
+	border-color: rgba(113,18,3,1);
+}
+
+/* End Display Memory */
 
 /*
 .form-control {

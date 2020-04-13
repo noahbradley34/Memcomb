@@ -32,11 +32,28 @@ namespace Memcomb.Controllers
             foreach (var item in db.Memories)
             {
                 Memory mem = db.Memories.Find(item.Memory_ID);
-                
+               
                 var v = db.Fragments.Where(a => a.Memory_ID == item.Memory_ID);
                 foreach (var s in v)  
                 {   
                     fragmentList.Add(new Fragment
+
+                    var v = db.Fragments.Where(a => a.Memory_ID == item.Memory_ID);
+
+                    foreach (var s in v)  
+                    {   
+                        fragmentList.Add(new Fragment
+                        {
+                            Memory_ID = s.Memory_ID,
+                            Fragment_ID = s.Fragment_ID,
+                            Fragment_Date = s.Fragment_Date,
+                            Fragment_Data = s.Fragment_Data,
+                            Memory_Description = s.Memory_Description,
+                            Fragment_Location = s.Fragment_Location,
+                            Is_Highlight = s.Is_Highlight
+                        });
+                    }
+                    memoryList.Add(new Memory
                     {
                         Memory_ID = s.Memory_ID,
                         Fragment_ID = s.Fragment_ID,
@@ -54,7 +71,12 @@ namespace Memcomb.Controllers
                 });
             }   
             return View(memoryList);
+            }
 
+            memoryList = memoryList.OrderBy(e => e.Date_Created).ToList();
+
+            //return View(memoryList); 
+            return View(db.Memories.ToList());
         }
         
         //Registration POST action
@@ -90,22 +112,38 @@ namespace Memcomb.Controllers
                             Memory_Title = model.Memory_Title,
                             Memory_Description = model.Memory_Description
                         };
-                        
+
                         Directory.CreateDirectory(Server.MapPath("~/Memories/User_ID_" + v.User_ID + "/Memory_ID_" + memoryIDForFolder));
-                        
-                        HttpPostedFileBase file = model.Fragment.getImagePath;
-                        
-                        if (file.ContentLength > 0)
+
+                        List<Fragment> fragmentList = new List<Fragment>();
+
+                        foreach (Fragment frag in model.Fragments.ToList())
                         {
-                            var fileName = Path.GetFileName(file.FileName);
-                            var path = Path.Combine(Server.MapPath("~/Memories/User_ID_" + v.User_ID + "/Memory_ID_" + memoryIDForFolder), fragmentIDPath + "_" + fileName );
-                            file.SaveAs(path);
-                       
-                            model.Fragment.Fragment_Data = path;
+                            HttpPostedFileBase file = frag.getImagePath;
+                            
+                            if (file.ContentLength > 0)
+                            {
+                                var fileName = Path.GetFileName(file.FileName);
+                                var path = Path.Combine(Server.MapPath("~/Memories/User_ID_" + v.User_ID + "/Memory_ID_" + memoryIDForFolder), fragmentIDPath + "_" + fileName);
+                                file.SaveAs(path);
+
+
+                                fragmentList.Add(new Fragment
+                                {
+                                    Fragment_Date = frag.Fragment_Date,
+                                    Fragment_Data = path,
+                                    Memory_Description = frag.Memory_Description,
+                                    Fragment_Location = frag.Fragment_Location
+                                });
+                            }
+
                         }
 
                         dc.Memories.Add(newMemory);
-                        dc.Fragments.Add(model.Fragment);
+                        foreach(var frag in fragmentList)
+                        {
+                            dc.Fragments.Add(frag);
+                        }
                         dc.SaveChanges();
                         Status = true;  
                     }
@@ -123,5 +161,6 @@ namespace Memcomb.Controllers
             return RedirectToAction("Index");
 
         }
+
     }
 }
