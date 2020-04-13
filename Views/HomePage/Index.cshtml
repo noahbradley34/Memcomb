@@ -11,7 +11,6 @@
 
 	<!-- Start of homepage memories -->
 	<div>
-
 		@foreach (var item in Model.Reverse())
 		{
 			foreach (var frag in item.fragmentList.Where(a => a.Memory_ID == item.Memory_ID))
@@ -59,8 +58,34 @@
 						</div>
 					</div>
 				</div>
+		@foreach (var mem in Model.Reverse())
+		{
+			var memoryID = mem.Memory_ID;
+			<div>
+				<br /><br />
+
+				<div class="displayMemoryBackground">
+
+					<span id="profileUserID_" class="profilePicAndUserName">
+						<img src="~/Images/memcombLogo.png" id="memoryHighlight" class="profilePic" /> <!-- Will eventually change the profile pic image source -->
+						<span class="userName">
+							@Html.DisplayFor(Model => mem.getFirstName)
+							@Html.DisplayFor(Model => mem.getLastName)
+						</span>
+					</span>
+					<div class="memoryTitle">
+						@Html.DisplayFor(Model => mem.Memory_Title)
+					</div>
+					<div class="memoryDescription">
+						@Html.DisplayFor(Model => mem.Memory_Description)
+					</div>
+					<div>
+						@Html.DisplayFor(Model => mem.Fragments, "Fragment")
+					</div>
+
+				</div>
+			</div>
 			}
-		}
 		<hr />
 	</div>
 	<!-- End of homepage memories -->
@@ -100,8 +125,6 @@
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
-<script src="~/Scripts/jquery-1.10.2.js"></script>
-<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 
 <div class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container">
@@ -121,7 +144,14 @@
 				<li>@Html.ActionLink("Profile", "Index", "Profile")</li>
 				<li>@Html.ActionLink("Settings", "Index", "Settings")</li>
 				<li>
-					@{Html.RenderPartial("_CreateMemory", new Memcomb.Models.Memory());}
+					@{
+						var memory = new Memcomb.Models.Memory();
+						memory.CreateFragments(1);
+
+						Html.RenderPartial("_CreateMemory", memory);
+
+
+						}
 				</li>
 			</ul>
 		</div>

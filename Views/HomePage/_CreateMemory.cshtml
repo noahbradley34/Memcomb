@@ -1,11 +1,14 @@
 ﻿
 
 @model Memcomb.Models.Memory
+@using Memcomb.Models
 
 	<link href="@Url.Content("~/Content/HomePage.css")" rel="stylesheet" type="text/css" />
 
+	<script src="~/Scripts/CustomJs.js"></script>
+
 	<body>
-			<!-- Create Memory Modal -->
+		<!-- Create Memory Modal -->
 
 			<!-- Trigger/Open The Modal -->
 			<button id="myBtn" class="createMemoryBtn">Create Memory</button>
@@ -58,8 +61,25 @@
 								</div>
 							</div>
 						</div>
+				<div class="createMemoryModal-content">
+
+					@using (Html.BeginForm("Index", "HomePage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+					{
+						@Html.AntiForgeryToken()
+					
+						<div class="btn postMemoryBtn">
+							@Html.AddLink("Add Fragment", "#fragmentsAdder", ".fragmenttts", "Fragments", typeof(Memcomb.Models.Fragment))
+						</div>
+						<span>
+							<input type="submit" value="Post Memory" class="btn postMemoryBtn" />
+						</span>
+						
+						
+						@Html.EditorForModel()
+
+						
 					}
-					</div>
+				</div>
 			</div>
 		<!-- End Of Create Memory Modal -->
 	</body>
@@ -92,71 +112,5 @@
 				modal.style.display = "none";
 			}
 		}
-
-	</script>
-
-	<script src="~/Scripts/jquery-3.4.1.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
-	<script>
-
-		// Start of upload Memories
-		var i = 0;
-
-		$(document).ready(function () {
-			$("#imageBrowes").change(function () {
-				var File = this.files;
-
-				if (File && File[0]) {
-					ReadImage(File[0]);
-				}
-
-			})
-		})
-
-		var ReadImage = function (file) {
-
-			var reader = new FileReader;
-			var image = new Image;
-
-			reader.readAsDataURL(file);
-			reader.onload = function (_file) {
-
-				image.src = _file.target.result;
-				image.onload = function () {
-
-					var height = this.height;
-					var width = this.width;
-					var type = file.type;
-					var size = ~~(file.size / 1024) + "KB";
-
-					$("#targetImg").attr('src', _file.target.result);
-					$("#description").text("Size:" + size + ", " + height + "X" + width + " " + type + "");
-					$("#imgPreview").show();
-				}
-			}
-		}
-
-		var divDuplicator = document.getElementById('duplicator');
-
-		function duplicate() {
-			var clone = divDuplicator.cloneNode(true); // "deep" clone
-			clone.id = "targetImg" + ++i;
-			// or clone.id = ""; if the divs don't need an ID
-			divDuplicator.parentNode.appendChild(clone);
-		}
-
-		var ClearPreview = function () {
-			$("#imageBrowes").val("");
-			//$("#description" + i).text("");
-			//$("#imgPreview" + i).hide();
-
-			$(document).on("click", "#targetImg" + i, function () {
-				$(this).remove();
-			})
-
-			i = i - 1;
-		}
-		// End of Memory Upload
 
 	</script>
