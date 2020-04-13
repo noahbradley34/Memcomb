@@ -36,16 +36,21 @@ body {
     height: 200px;
 }
 .background-image{
-    width: 100%;
+    width: 750px;
     height: 200px;
     color: greenyellow;
-    text-align: center;
+    align-content: center;
     border: solid;
+    background-color: orange;
     border-color: yellow;
+    box-shadow: 0px 0px 20px #FFFF3E;
 }
 .image-resize{
-    width: auto;
-    height: auto;
+    display: -webkit-flex;
+    -webkit-flex-direction:column;
+}
+.browserbox{
+    background-color: brown;
 }
 .text-box{
     width: 100%;
@@ -77,7 +82,9 @@ body {
     transition-duration: 0.4s;
     cursor: pointer;
 }
-
+.userstyle {
+    text-emphasis-color: darkorange
+}
 .editProfileBtn:hover {
     background-color: #FFFF3E;
     color: #000000;
@@ -98,4 +105,7 @@ body {
     text-align: left;
     color:#ffffff;
     width: 100%;
+}
+.form-control{
+    background-color: saddlebrown;
 }

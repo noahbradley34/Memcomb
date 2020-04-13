@@ -1,0 +1,65 @@
+﻿
+
+@model Memcomb.Models.Memory
+@using Memcomb.Models
+
+<link href="@Url.Content("~/Content/HomePage.css")" rel="stylesheet" type="text/css" />
+
+<script src="~/Scripts/CustomJs.js"></script>
+
+<body>
+	<!-- Create Memory Modal -->
+	<!-- Trigger/Open The Modal -->
+	<button id="myBtn" class="createMemoryBtn">Create Memory</button>
+
+	<!-- The Modal -->
+	<div id="myModal" class="createMemoryModal">
+
+		<!-- Modal content -->
+		<div class="createMemoryModal-content">
+
+			@using (Html.BeginForm("Index", "HomePage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+			{
+				@Html.AntiForgeryToken()
+
+				<div class="btn postMemoryBtn">
+					@Html.AddLink("Add Fragment", "#fragmentsAdder", ".fragmenttts", "Fragments", typeof(Memcomb.Models.Fragment))
+				</div>
+				<span>
+					<input type="submit" value="Post Memory" class="btn postMemoryBtn" />
+				</span>
+
+
+				@Html.EditorForModel()
+
+
+			}
+		</div>
+	</div>
+	<!-- End Of Create Memory Modal -->
+</body>
+
+
+<script>
+
+	// Get the modal
+	var modal = document.getElementById("myModal"); // Create Memory Modal
+	// Get the button that opens the modal
+	var btn = document.getElementById("myBtn"); // Create Memory Modal
+	// Get the <span> element that closes the modal
+	var span = document.getElementById("createMemoryClose");
+	// When the user clicks the button, open the modal
+	btn.onclick = function () {
+		modal.style.display = "block";
+	}
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function () {
+		modal.style.display = "none";
+	}
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function (event) {
+		if (event.target == modal) {
+			modal.style.display = "none";
+		}
+	}
+</script>

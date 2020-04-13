@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BeginCollectionItem, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\BeginCollectionItem.1.2.1.0\lib\net35\BeginCollectionItem.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -55,6 +58,7 @@
       <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -147,6 +151,7 @@
     <Compile Include="Models\Convo.cs">
       <DependentUpon>memcombDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CreateMemoryModel.cs" />
     <Compile Include="Models\Flag.cs">
       <DependentUpon>memcombDB.tt</DependentUpon>
     </Compile>
@@ -157,6 +162,7 @@
       <DependentUpon>memcombDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HomePageModel.cs" />
+    <Compile Include="Models\HtmlHelpers.cs" />
     <Compile Include="Models\Like.cs">
       <DependentUpon>memcombDB.tt</DependentUpon>
     </Compile>
@@ -181,6 +187,7 @@
     <Compile Include="Models\Message.cs">
       <DependentUpon>memcombDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProfilePageModel.cs" />
     <Compile Include="Models\User.cs">
       <DependentUpon>memcombDB.tt</DependentUpon>
     </Compile>
@@ -203,6 +210,13 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\LogInPageBackground.png" />
     <Content Include="Images\memcombLogo.png" />
+    <Content Include="Memories\User_ID_23\Memory_ID_1015\14_cursed fish.jfif" />
+    <Content Include="Memories\User_ID_23\Memory_ID_10\9_giants2.jfif" />
+    <Content Include="Memories\User_ID_23\Memory_ID_11\10_giants2.jfif" />
+    <Content Include="Memories\User_ID_23\Memory_ID_12\11_giants2.jfif" />
+    <Content Include="Memories\User_ID_23\Memory_ID_13\12_hat.jpg" />
+    <Content Include="Memories\User_ID_23\Memory_ID_14\13_image3.jfif" />
+    <Content Include="Memories\User_ID_23\Memory_ID_9\8_giants2.jfif" />
     <Content Include="Models\memcombDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>memcombDB.edmx</DependentUpon>
@@ -227,6 +241,7 @@
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\backgroundupload.js" />
+    <Content Include="Scripts\CustomJs.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -263,11 +278,24 @@
     <Content Include="Views\Followings\Index.cshtml" />
     <Content Include="Views\HomePage\View.cshtml" />
     <Content Include="Views\Profile\_FollowingPartial.cshtml" />
+    <Content Include="Views\HomePage\_CreateMemory.cshtml" />
+    <Content Include="Views\HomePage\EditorTemplates\Memory.cshtml" />
+    <Content Include="Views\HomePage\EditorTemplates\Fragment.cshtml" />
+    <Content Include="Views\HomePage\DisplayTemplates\Fragment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Memories\UserID\MemoryID\" />
+    <Folder Include="Memories\User_ID32\" />
     <Folder Include="Queries\" />
+    <Folder Include="Users\UserID\BackgroundID\" />
+    <Folder Include="Users\UserID\ProfileID\" />
+    <Folder Include="Users\User_ID_20\Background_Pic\" />
+    <Folder Include="Users\User_ID_20\Profile_Pic\" />
+    <Folder Include="Users\User_ID_23\Background_ID_1\" />
+    <Folder Include="Users\User_ID_23\Background_Pic\" />
+    <Folder Include="Users\User_ID_23\Profile_ID_1\" />
+    <Folder Include="Users\User_ID_23\Profile_Pic\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
