@@ -12,20 +12,24 @@ namespace Memcomb.Controllers
     public class ProfileController : Controller
     {
         // GET: Profile
-        public ActionResult Index(User profiler)
+        public ActionResult Index()
         {
-            memcombdbEntities db = new memcombdbEntities();
-            //ProfilePageModel profiler = new ProfilePageModel();
-            foreach (var u in db.Users)
+            User user = new User();
+            using (memcombdbEntities dc = new memcombdbEntities())
             {
-                profiler.First_Name = u.First_Name;
-                profiler.Last_Name = u.Last_Name;
-                profiler.Profile_Picture = u.Profile_Picture;
-                profiler.Profile_Picture_imgPath = u.Profile_Picture_imgPath;
-                profiler.Background_Photo = u.Background_Photo;
-                profiler.Background_Pic = u.Background_Pic;
+                if (HttpContext.Request.Cookies["userIDCookie"] != null)
+                {
+                    var cookie = HttpContext.Request.Cookies.Get("userIDCookie");
+                    var v = dc.Users.Where(a => a.Email_ID == cookie.Value);
+                    foreach (var u in v)
+                    {
+                        user.Profile_Picture = u.Profile_Picture;
+                        user.Background_Pic = u.Background_Pic;
+                    }
+                }
             }
-            return View(profiler);
+            //ProfilePageModel profiler = new ProfilePageModel();
+            return View(user);
         }
         [HttpPost]
         [AllowAnonymous]
@@ -87,7 +91,7 @@ namespace Memcomb.Controllers
             {
                 message = "Invalid request";
             }
-            return RedirectToAction("Index", model);
+            return RedirectToAction("Index");
         }
         [HttpPost]
         [AllowAnonymous]
@@ -142,7 +146,7 @@ namespace Memcomb.Controllers
             {
                 message = "Invalid request";
             }
-            return RedirectToAction("Index", model);
+            return RedirectToAction("Index");
         }
         // GET: Profile/Details/5
         public ActionResult Details(int id)

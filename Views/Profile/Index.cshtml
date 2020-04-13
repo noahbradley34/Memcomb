@@ -2,24 +2,44 @@
     ViewBag.Title = "Profile";
 }
 @model Memcomb.Models.User
+@{	var resprofile = "";
+    var setprofileImage = "";
+    var resbackground = "";
+    var setbackgroundImage = "";
+    if (Html.DisplayNameFor(model => model.Profile_Picture) != null)
+    {
+        resprofile = Model.Profile_Picture.Replace(@"C:\Users\Jzhan\Documents\GitHub\Memcomb", ""); //Need to set this to work for server
+        setprofileImage = resprofile.Replace(@"\", "/");
+    }
+    if (Html.DisplayNameFor(model => model.Background_Pic) != null)
+    {
+		resbackground = Model.Background_Pic.Replace(@"C:\Users\Jzhan\Documents\GitHub\Memcomb", ""); //Need to set this to work for server
+        setbackgroundImage = resbackground.Replace(@"\", "/");
+    }
+}
 <link href="@Url.Content("~/Content/Profile.css")" rel="stylesheet" type="text/css" />
 <head>
-	<div class="head" style="align-content: center; width: 80%; margin: auto">
+
+    <div class="head" style="align-content: center; width: 80%; margin: auto">
 		<div>
 			<div>
-				<img class="background-image" src="@Url.Action(Model.Background_Pic)" style="padding: 6px;" />
+				<img class="background-image" 
+		         src="@setbackgroundImage" style="padding: 6px;" />
 			</div>
 			<br />
 		</div>
 		<div>
 			<div>
-				<img src="@Url.Action(Model.Profile_Picture)" style="width:160px; height:160px;
-					margin: auto;
-					-moz-border-radius: 60px;
-					border-radius: 100px;
-					padding: 6px;
-					background-color: orangered;
-					box-shadow: 0px 0px 20px #ff6a00;" />
+
+                <img src="@setprofileImage" style="width:160px; height:160px;
+
+                    margin: auto;
+                    -moz-border-radius: 60px;
+                    border-radius: 100px;
+                padding: 6px;
+                    background-color: orangered;
+                    box-shadow: 0px 0px 20px #ff6a00;" />
+                
 			</div>
 			<br />
 		</div>
@@ -72,10 +92,10 @@
 			</div>
 		</div>
 		<diV>
-			<h1 style="color: yellow; font: bold">@Model.First_Name @Model.Last_Name</h1>
+			<h1 style="color: yellow; font: bold">@Html.DisplayTextFor(model => model.First_Name) @Html.DisplayTextFor(model => model.Last_Name)</h1>
 		</diV>
 		<div>
-			<p>@Model.Biography</p>
+			<p>@Html.DisplayTextFor(model => model.Biography)</p>
 		</div>
 	</div>
 
