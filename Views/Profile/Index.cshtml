@@ -1,78 +1,64 @@
 ﻿@{
-	ViewBag.Title = "Profile";
+    ViewBag.Title = "Profile";
 }
-@model Memcomb.Models.ProfilePageModel
-@{
-	WebImage photo;
-	var newFileName = "";
-	var imagePath = "";
-	if (Request.Form["uploadProfile"]!=null)
-	{
-		photo = WebImage.GetImageFromRequest();
-		if (photo != null)
-		{
-			newFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(photo.FileName);
-			imagePath = @"Images\" + newFileName;
-			photo.Save(@"~\" + imagePath);
-		}
-	}
-}
-@{
-	WebImage background;
-	var BackgroundFileName = "";
-	var BackgroundPath = "";
-	if (Request.Form["uploadBackground"]!=null)
-	{
-		background = WebImage.GetImageFromRequest();
-		if (background != null)
-		{
-			BackgroundFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(background.FileName);
-			BackgroundPath = @"Images\" + BackgroundFileName;
-			background.Save(@"~\" + BackgroundPath);
-		}
-	}
+@model Memcomb.Models.User
+@{	var resprofile = "";
+    var setprofileImage = "";
+    var resbackground = "";
+    var setbackgroundImage = "";
+    if (Html.DisplayNameFor(model => model.Profile_Picture) != null)
+    {
+        resprofile = Model.Profile_Picture.Replace(@"C:\Users\Jzhan\Documents\GitHub\Memcomb", ""); //Need to set this to work for server
+        setprofileImage = resprofile.Replace(@"\", "/");
+    }
+    if (Html.DisplayNameFor(model => model.Background_Pic) != null)
+    {
+		resbackground = Model.Background_Pic.Replace(@"C:\Users\Jzhan\Documents\GitHub\Memcomb", ""); //Need to set this to work for server
+        setbackgroundImage = resbackground.Replace(@"\", "/");
+    }
 }
 <link href="@Url.Content("~/Content/Profile.css")" rel="stylesheet" type="text/css" />
 <head>
-	<div class="head">
+
+    <div class="head" style="align-content: center; width: 80%; margin: auto">
 		<div>
-				<div>
-					<img class="background-image" src="@BackgroundPath" style="margin:auto; padding: 6px;" />
-				</div>
-				<br />
+			<div>
+				<img class="background-image" 
+		         src="@setbackgroundImage" style="padding: 6px;" />
+			</div>
+			<br />
 		</div>
 		<div>
-				<div>
-					<img src="@imagePath" style="width:160px; height:160px;
-					margin: auto;
-					-moz-border-radius: 60px;
-					border-radius: 100px;
-					padding: 6px;
-					box-shadow: 0px 0px 20px #ff6a00;" />
-				</div>
-				<br />
+			<div>
+
+                <img src="@setprofileImage" style="width:160px; height:160px;
+
+                    margin: auto;
+                    -moz-border-radius: 60px;
+                    border-radius: 100px;
+                padding: 6px;
+                    background-color: orangered;
+                    box-shadow: 0px 0px 20px #ff6a00;" />
+                
+			</div>
+			<br />
 		</div>
 		<h1>
-			<!--<img src="@Url.Action("Index", "Profile")" style="width:160px; height:160px;
-					margin: auto;
-					-moz-border-radius: 60px;
-					border-radius: 100px;
-					padding: 6px;
-					box-shadow: 0px 0px 20px #ff6a00;" />-->
 		</h1>
 		<div class="spaceBetween">
 			<div>
-				@using (Html.BeginForm("Index", "Profile", FormMethod.Post, new
+				@using (Html.BeginForm("ProfilePicture", "Profile", null, FormMethod.Post, new
 				{
-					enctype = "multipart/form-data",
-					id="profileImage"
+					enctype = "multipart/form-data"
 				}))
 				{
 					@Html.AntiForgeryToken()
 					<div class="form-group">
 						<div class="form-inline">
-							<input type="file" name="Edit Profile Image" id="profileImage" accept=".png,.jpg,.jpeg,.gif,.tif,.jfif" />
-							<input type="submit" name="uploadProfile" value="Upload Profile"/>
+							<div>
+							@Html.TextBoxFor(model => model.Profile_Picture_imgPath, new { @class = "form-control", type = "file", id = "imageBrowes" })
+							</div>
+							<input type="submit" name="uploadProfile" value="Upload Profile" style="color: saddlebrown; background-color: yellow; border-color: saddlebrown"/>
 						</div>
 					</div>
 				}
@@ -88,37 +74,33 @@
 			-->
 			<!--<input type="file" onchange="loadImageFile(this)"/>-->
 			<div>
-				@using (Html.BeginForm("Index", "Profile", FormMethod.Post, new
+				@using (Html.BeginForm("BackgroundPicture", "Profile", null, FormMethod.Post, new
 				{
-					enctype = "multipart/form-data",
-					id = "backgroundImage"
+					enctype = "multipart/form-data"
 				}))
 				{
 					@Html.AntiForgeryToken()
 					<div class="form-group">
 						<div class="form-inline">
-							<input type="file" name="Edit Background Image" id="backgroundImage" accept=".png,.jpg,.jpeg,.gif,.tif,.jfif" />
-							<input type="submit" name="uploadBackground" value="Upload Background"/>
+							<div>
+							@Html.TextBoxFor(model => model.Background_Photo, new { @class = "form-control", type = "file", id = "imageBrowes"})
+							</div>
+							<input type="submit" name="uploadBackground" value="Upload Background" style="color: saddlebrown; background-color: yellow; border-color: saddlebrown"/>
 						</div>
 					</div>
 				}
 			</div>
-			<div>
-				<a href="@Url.Action("Index", "HomePage")" class="editProfileBtn">
-					Edit Profile
-				</a>
-			</div>
 		</div>
 		<diV>
-			<h1>User Name</h1>
+			<h1 style="color: yellow; font: bold">@Html.DisplayTextFor(model => model.First_Name) @Html.DisplayTextFor(model => model.Last_Name)</h1>
 		</diV>
 		<div>
-			<p>Bio</p>
+			<p>@Html.DisplayTextFor(model => model.Biography)</p>
 		</div>
 	</div>
 
 	<div class="followerRow">
-		<table>
+		<table style="color: darkorange; margin-left: 90px">
 			<tr>
 				<td>
 					| 100 following
@@ -139,18 +121,6 @@
 		</table>
 	</div>
 </head>
-
-<body>
-	<div>
-		<p>
-			<form class="posts" action="" method="post">
-				<input class="text-box" type="text" name="Posts" /> <br />
-				<input class="post-btn" type="submit" value="Post" />
-			</form>
-		</p>
-	</div>
-</body>
-
 <div class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container">
 		<div class="navbar-header">

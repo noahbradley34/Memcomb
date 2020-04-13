@@ -7,6 +7,15 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Net.Mail;
@@ -37,11 +46,11 @@ namespace Memcomb.Controllers
                 foreach (var item in m)
                 {
                     Memory mem = db.Memories.Find(item.Memory_ID);
-                
+
                     var v = db.Fragments.Where(a => a.Memory_ID == item.Memory_ID);
 
-                    foreach (var s in v)  
-                    {   
+                    foreach (var s in v)
+                    {
                         fragmentList.Add(new Fragment
                         {
                             Memory_ID = s.Memory_ID,
@@ -64,7 +73,7 @@ namespace Memcomb.Controllers
                         Date_Created = mem.Date_Created,
                         fragmentList = fragmentList
                     });
-                }   
+                }
 
                 userList.Add(new User
                 {
@@ -80,7 +89,7 @@ namespace Memcomb.Controllers
             //return View(memoryList); 
             return View(db.Memories.ToList());
         }
-        
+
         //Registration POST action
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -96,7 +105,7 @@ namespace Memcomb.Controllers
                 #region Save to database
                 using (memcombdbEntities dc = new memcombdbEntities())
                 {
-                     
+
                     if (HttpContext.Request.Cookies["userIDCookie"] != null)
                     {
                         HttpCookie cookie = HttpContext.Request.Cookies.Get("userIDCookie");
@@ -123,7 +132,7 @@ namespace Memcomb.Controllers
                         foreach (Fragment frag in model.Fragments.ToList())
                         {
                             HttpPostedFileBase file = frag.getImagePath;
-                            
+
                             if (file.ContentLength > 0)
                             {
                                 var fileName = Path.GetFileName(file.FileName);
@@ -143,12 +152,12 @@ namespace Memcomb.Controllers
                         }
 
                         dc.Memories.Add(newMemory);
-                        foreach(var frag in fragmentList)
+                        foreach (var frag in fragmentList)
                         {
                             dc.Fragments.Add(frag);
                         }
                         dc.SaveChanges();
-                        Status = true;  
+                        Status = true;
                     }
                 }
                 #endregion
