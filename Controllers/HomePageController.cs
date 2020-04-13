@@ -32,7 +32,6 @@ namespace Memcomb.Controllers
             foreach (var item in db.Memories)
             {
                 Memory mem = db.Memories.Find(item.Memory_ID);
-                
                 var v = db.Fragments.Where(a => a.Memory_ID == item.Memory_ID);
                 foreach (var s in v)  
                 {   
@@ -53,7 +52,6 @@ namespace Memcomb.Controllers
                         });
                     }
                     memoryList.Add(new Memory
-
                     {
                         Memory_ID = s.Memory_ID,
                         Fragment_ID = s.Fragment_ID,
@@ -71,14 +69,12 @@ namespace Memcomb.Controllers
                 });
             }   
             return View(memoryList);
-
             }
 
             memoryList = memoryList.OrderBy(e => e.Date_Created).ToList();
 
             //return View(memoryList); 
             return View(db.Memories.ToList());
-
         }
         
         //Registration POST action
