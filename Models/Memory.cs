@@ -28,13 +28,7 @@ namespace Memcomb.Models
         public Nullable<System.DateTime> Date_Created { get; set; }
         public string Memory_Title { get; set; }
         public string Memory_Description { get; set; }
-        public string getFirstName { get; set; }
-        public string getLastName
-        {
-            get; set;
-        }
-        public List<Fragment> fragmentList { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -43,6 +37,12 @@ namespace Memcomb.Models
         public virtual ICollection<Flag> Flags { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Like> Likes { get; set; }
+        public string getFirstName { get; set; }
+        public string getLastName
+        {
+            get; set;
+        }
+        public List<Fragment> fragmentList { get; set; }
         public virtual User User { get; set; }
     }
 }
