@@ -39,8 +39,23 @@ namespace Memcomb.Controllers
                     var v = dc.Users.Where(a => a.Email_ID == cookie.Value);
                     foreach (var u in v)
                     {
-                        user.Profile_Picture = u.Profile_Picture;
-                        user.Background_Pic = u.Background_Pic;
+                        if (u.Profile_Picture == null)
+                        {
+                            user.Profile_Picture = "C:/Users/Isaac/Documents/stew.jpg";
+                        }
+                        else
+                        {
+                            user.Profile_Picture = u.Profile_Picture;
+                        }
+                        if (u.Background_Pic == null)
+                        {
+                            user.Background_Pic = "C:/Users/Isaac/Documents/stew.jpg";
+                        }
+                        else
+                        {
+                            user.Background_Pic = u.Background_Pic;
+                        }
+                        
                     }
                 }
             }

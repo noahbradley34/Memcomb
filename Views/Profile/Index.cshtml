@@ -2,19 +2,19 @@
 @{
 	ViewBag.Title = "Profile";
 }
-@model Memcomb.Models.User
+
 @{	var resprofile = "";
     var setprofileImage = "";
     var resbackground = "";
     var setbackgroundImage = "";
     if (Html.DisplayNameFor(model => model.Profile_Picture) != null)
     {
-        resprofile = Model.Profile_Picture.Replace(@"C:\Users\Jzhan\Documents\GitHub\Memcomb", ""); //Need to set this to work for server
+        resprofile = Model.Profile_Picture.Replace(@"C:\Users\Isaac\Documents\GitHub\Memcomb", ""); //Need to set this to work for server
         setprofileImage = resprofile.Replace(@"\", "/");
-    }
+    } 
     if (Html.DisplayNameFor(model => model.Background_Pic) != null)
     {
-		resbackground = Model.Background_Pic.Replace(@"C:\Users\Jzhan\Documents\GitHub\Memcomb", ""); //Need to set this to work for server
+        resbackground = Model.Background_Pic.Replace(@"C:\Users\Isaac\Documents\GitHub\Memcomb", ""); //Need to set this to work for server
         setbackgroundImage = resbackground.Replace(@"\", "/");
     }
 }
@@ -113,7 +113,7 @@
 
 					@{ 
                         
-                        Html.RenderPartial("_FollowingPartial");
+                       // Html.RenderPartial("_FollowingPartial");
 					}
 					
 
