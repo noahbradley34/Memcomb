@@ -21,7 +21,6 @@ namespace Memcomb.Models
             this.Fragments = new HashSet<Fragment>();
             this.Flags = new HashSet<Flag>();
             this.Likes = new HashSet<Like>();
-            this.FragmentsAdder = new HashSet<Fragment>();
         }
     
         public int Memory_ID { get; set; }
@@ -40,8 +39,10 @@ namespace Memcomb.Models
         public virtual ICollection<Like> Likes { get; set; }
         public virtual User User { get; set; }
 
-        public List<Fragment> fragmentList { get; set; }
-        public virtual ICollection<Fragment> FragmentsAdder { get; set; }
+        public string getFirstName { get; set; }
+        public string getLastName { get; set; }
+
+        public string getProfilePic { get; set; }
 
         public void CreateFragments(int count = 1)
         {
@@ -50,10 +51,5 @@ namespace Memcomb.Models
                 Fragments.Add(new Fragment());
             }
         }
-        public Fragment Fragment { get; set; }
-        public string getFirstName { get; set; }
-        public string getLastName { get; set; }
-
-        public string getProfilePic { get; set; }
     }
 }
