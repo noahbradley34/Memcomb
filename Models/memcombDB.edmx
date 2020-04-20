@@ -610,7 +610,7 @@ warning 6002: The table/view 'memcombdb.dbo.Likes' does not have a primary key d
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="memcombdbEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="memcombdbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Comments" EntityType="Self.Comment" />
           <EntitySet Name="Connections" EntityType="Self.Connection" />
           <EntitySet Name="Convoes" EntityType="Self.Convo" />
@@ -672,7 +672,7 @@ warning 6002: The table/view 'memcombdb.dbo.Likes' does not have a primary key d
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="memcombdbStoreContainer" CdmEntityContainer="memcombdbEntities1">
+        <EntityContainerMapping StorageEntityContainer="memcombdbStoreContainer" CdmEntityContainer="memcombdbEntities">
           <EntitySetMapping Name="Comments">
             <EntityTypeMapping TypeName="memcombdb.Comment">
               <MappingFragment StoreEntitySet="Comments">

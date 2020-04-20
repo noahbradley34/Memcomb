@@ -384,3 +384,5 @@ bin/Memcomb.dll.config
 Memcomb.csproj
 Models/memcombDB.edmx.diagram
 Web.config
+Web.config
+Models/memcombDB.edmx.diagram
