@@ -18,18 +18,8 @@ namespace Memcomb.Controllers
         public ActionResult Index()
         {
             List<Following> followingList = new List<Following>();
-            using (memcombdbEntities db = new memcombdbEntities())
-            {
-                if (HttpContext.Request.Cookies["userIDCookie"] != null)
-                {
-                    HttpCookie cookie = HttpContext.Request.Cookies.Get("userIDCookie");
-                    var v = db.Users.Where(a => a.Email_ID == cookie.Value).FirstOrDefault();
-                    var data = db.Followings.Include(f => f.User);
-
-                   // return View(data.ToList());
-                }
-            }
-                
+            var followingCount = 0;
+               
             User user = new User();
             using (memcombdbEntities dc = new memcombdbEntities())
             {
@@ -37,6 +27,8 @@ namespace Memcomb.Controllers
                 {
                     var cookie = HttpContext.Request.Cookies.Get("userIDCookie");
                     var v = dc.Users.Where(a => a.Email_ID == cookie.Value);
+                    var data = dc.Followings.Where(f => f.User.Email_ID == cookie.Value);
+                    
                     foreach (var u in v)
                     {
                         user.First_Name = u.First_Name;
@@ -60,6 +52,24 @@ namespace Memcomb.Controllers
                             user.Background_Pic = @"~\Users\Default\Background_Pic\default.jpg";
                         }
                     }
+
+                    foreach (var item in data)
+                    {
+                        followingCount = followingCount + 1;
+                        var followed_user_id = dc.Users.Where(b => b.User_ID == item.User_Followed).FirstOrDefault();
+                        followingList.Add(new Following
+                        {
+                            User_Followed = item.User_Followed,
+                            User_Following = item.User_Following,
+                            User_Followed_First_Name = followed_user_id.First_Name,
+                            User_Followed_Last_Name = followed_user_id.Last_Name,
+                            User = user,
+                        });
+                        
+                    }
+                    ViewBag.followingCount = followingCount;
+                    
+                    user.Followings = followingList;
                 }
             }
             //ProfilePageModel profiler = new ProfilePageModel();

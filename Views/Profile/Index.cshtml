@@ -108,15 +108,15 @@
 		<table style="color: darkorange; margin-left: 90px">
 			<tr>
 				<td>
-					| 100
-					<button class="btn btn-primary" data-target="#followingsModal" data-toggle="modal" value="followings_modal">Followings</button>
-
-					@{ 
-                        
-                       // Html.RenderPartial("_FollowingPartial");
-					}
+					| 
 					
 
+					@{
+
+						Html.RenderPartial("_FollowingPartial", Model.Followings);
+					}
+
+
 
 
 
@@ -125,36 +125,40 @@
 					&nbsp;&nbsp;|&nbsp;&nbsp;
 				</td>
 				<td>
-					100 followers
+					X Followers
+					
 				</td>
 				<td>
 					&nbsp;&nbsp;|&nbsp;&nbsp;
 				</td>
 				<td>
-					20 Memories |
+					X Memories |
 				</td>
 			</tr>
 		</table>
 	</div>
-</head>
-<div class="navbar navbar-inverse navbar-fixed-top">
-	<div class="container">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			@Html.ActionLink("Memcomb", "Index", "LogInPage", new { area = "" }, new { @class = "navbar-brand" })
-		</div>
-		<div class="navbar-collapse collapse">
-			<ul class="nav navbar-nav">
-				<li>@Html.ActionLink("Home", "Index", "HomePage")</li>
-				<li>@Html.ActionLink("Notifications", "About", "LogInPage")</li>
-				<li>@Html.ActionLink("Messages", "Index", "LogInPage")</li>
-				<li>@Html.ActionLink("Profile", "Index", "Profile")</li>
-				<li>@Html.ActionLink("Settings", "Index", "Settings")</li>
-			</ul>
+</body>
+	<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				@Html.ActionLink("Memcomb", "Index", "LogInPage", new { area = "" }, new { @class = "navbar-brand" })
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li>@Html.ActionLink("Home", "Index", "HomePage")</li>
+					<li>@Html.ActionLink("Notifications", "About", "LogInPage")</li>
+					<li>@Html.ActionLink("Messages", "Index", "LogInPage")</li>
+					<li>@Html.ActionLink("Profile", "Index", "Profile")</li>
+					<li>@Html.ActionLink("Settings", "Index", "Settings")</li>
+				</ul>
+			</div>
 		</div>
 	</div>
-</div>

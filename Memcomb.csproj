@@ -282,6 +282,7 @@
     <Content Include="Views\HomePage\EditorTemplates\Memory.cshtml" />
     <Content Include="Views\HomePage\EditorTemplates\Fragment.cshtml" />
     <Content Include="Views\HomePage\DisplayTemplates\Fragment.cshtml" />
+    <Content Include="Views\Profile\_FollowerPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
