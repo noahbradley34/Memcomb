@@ -380,3 +380,7 @@ Models/memcombDB.edmx.diagram
 Models/memcombDB.Designer.cs
 Web.config
 bin/Memcomb.dll.config
+bin/Memcomb.dll.config
+Memcomb.csproj
+Models/memcombDB.edmx.diagram
+Web.config

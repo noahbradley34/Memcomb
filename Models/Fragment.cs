@@ -34,6 +34,7 @@ namespace Memcomb.Models
         public virtual ICollection<Connection> Connections { get; set; }
         public virtual Memory Memory { get; set; }
 
+
         public string[] getImage { get; set; }
         public HttpPostedFileBase getImagePath { get; set; }
     }
