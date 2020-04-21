@@ -239,7 +239,7 @@ namespace Memcomb.Controllers
                     var v = db.Users.Where(a => a.Email_ID == cookie.Value).FirstOrDefault();
                     //id = v.Email_ID;
 
-                    var data = db.Followings.Include(f => f.User).Where(f => f.User.Email_ID == id);
+                    //var data = db.Followings.Include(f => f.User).Where(f => f.User.Email_ID == id);
 
                    // var followed_user = db.Followings.Where(a => a.User_Followed == v.User_ID).FirstOrDefault();
 
@@ -266,7 +266,7 @@ namespace Memcomb.Controllers
                             User_Last_Name = x.Last_Name
                         }); */
 
-                    return View(data);
+                    return View();
                 }
                 else
                 {
