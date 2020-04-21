@@ -33,6 +33,7 @@ namespace Memcomb.Controllers
                     {
                         user.First_Name = u.First_Name;
                         user.Last_Name = u.Last_Name;
+                        user.Memories = u.Memories;
                         if (u.Profile_Picture != null)
                         {
                             var temp = u.Profile_Picture.Replace(@"C:\Users\17347\Desktop\Capstone Project\Github\MemcombRepo\Memcomb", "~");
@@ -68,6 +69,7 @@ namespace Memcomb.Controllers
                         
                     }
                     ViewBag.followingCount = followingCount;
+                    ViewBag.memoryCount = user.Memories.Count;
                     
                     user.Followings = followingList;
                 }

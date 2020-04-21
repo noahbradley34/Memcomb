@@ -4,17 +4,16 @@
 
 <body>
     <button class="btn btn-primary" data-target="#followingsModal" data-toggle="modal">@ViewBag.followingCount Following</button>
-    <div class="modal fade" id="followingsModal" tabindex="-1">
+    <div class="modal" id="followingsModal" tabindex="-1" >
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Following</h4>
+                    <button class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     <table class="table">
-                        <tr>
-                        </tr>
+
                         @if (Model != null)
                         {
 
@@ -33,13 +32,15 @@
                                 </tr>
                             }
                         }
-
-
                     </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
+    
 
 </body>
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
@@ -49,7 +50,7 @@
 <script>
 
     // Get the modal
-    var modal = document.getElementById("myModal"); // Create Memory Modal
+    var modal = document.getElementById("followingsModal"); // Create Memory Modal
     // Get the button that opens the modal
     var btn = document.getElementById("myBtn"); // Create Memory Modal
     // Get the <span> element that closes the modal

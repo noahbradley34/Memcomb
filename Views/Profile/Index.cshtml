@@ -1,6 +1,6 @@
 ﻿@model Memcomb.Models.User
 @{
-	ViewBag.Title = "Profile";
+    ViewBag.Title = "Profile";
 }
 
 @{	var resprofile = "";
@@ -11,10 +11,10 @@
     {
         resprofile = Model.Profile_Picture.Replace(@"~", ""); //Need to set this to work for server
         setprofileImage = resprofile.Replace(@"\", "/");
-    } 
+    }
     if (Html.DisplayNameFor(model => model.Background_Pic) != null)
     {
-		resbackground = Model.Background_Pic.Replace(@"~", ""); //Need to set this to work for server
+        resbackground = Model.Background_Pic.Replace(@"~", ""); //Need to set this to work for server
         setbackgroundImage = resbackground.Replace(@"\", "/");
     }
 }
@@ -49,10 +49,10 @@
 		<div class="spaceBetween">
 			<div>
 				@using (Html.BeginForm("ProfilePicture", "Profile", null, FormMethod.Post, new
-				{
-					enctype = "multipart/form-data"
-				}))
-				{
+                {
+                    enctype = "multipart/form-data"
+                }))
+                {
 					@Html.AntiForgeryToken()
 					<div class="form-group">
 						<div class="form-inline">
@@ -62,7 +62,7 @@
 							<input type="submit" name="uploadProfile" value="Upload Profile" style="color: saddlebrown; background-color: yellow; border-color: saddlebrown"/>
 						</div>
 					</div>
-				}
+                }
 			</div>
 			<!--if (ProfilePath != "")
 			{
@@ -76,20 +76,20 @@
 			<!--<input type="file" onchange="loadImageFile(this)"/>-->
 			<div>
 				@using (Html.BeginForm("BackgroundPicture", "Profile", null, FormMethod.Post, new
-				{
-					enctype = "multipart/form-data"
-				}))
-				{
+                {
+                    enctype = "multipart/form-data"
+                }))
+                {
 					@Html.AntiForgeryToken()
 					<div class="form-group">
 						<div class="form-inline">
 							<div>
-							@Html.TextBoxFor(model => model.Background_Photo, new { @class = "form-control", type = "file", id = "imageBrowes"})
+							@Html.TextBoxFor(model => model.Background_Photo, new { @class = "form-control", type = "file", id = "imageBrowes" })
 							</div>
 							<input type="submit" name="uploadBackground" value="Upload Background" style="color: saddlebrown; background-color: yellow; border-color: saddlebrown"/>
 						</div>
 					</div>
-				}
+                }
 			</div>
 		</div>
 		<diV>
@@ -108,17 +108,11 @@
 		<table style="color: darkorange; margin-left: 90px">
 			<tr>
 				<td>
-					| 
-					
-
+					|
 					@{
 
-						Html.RenderPartial("_FollowingPartial", Model.Followings);
+                        Html.RenderPartial("_FollowingPartial", Model.Followings);
 					}
-
-
-
-
 
 				</td>
 				<td>
@@ -127,12 +121,13 @@
 				<td>
 					X Followers
 					
+
 				</td>
 				<td>
 					&nbsp;&nbsp;|&nbsp;&nbsp;
 				</td>
 				<td>
-					X Memories |
+					@ViewBag.memoryCount Memories Posted |
 				</td>
 			</tr>
 		</table>
