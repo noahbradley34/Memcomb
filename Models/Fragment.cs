@@ -25,7 +25,7 @@ namespace Memcomb.Models
         public int Fragment_ID { get; set; }
         public int Memory_ID { get; set; }
         public Nullable<System.DateTime> Date_Posted { get; set; }
-        public System.DateTime Fragment_Date { get; set; }
+        public Nullable<System.DateTime> Fragment_Date { get; set; }
         public string Fragment_Location { get; set; }
         public string Memory_Description { get; set; }
         public string Fragment_Data { get; set; }
