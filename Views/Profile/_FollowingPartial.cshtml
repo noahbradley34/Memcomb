@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Memcomb.Models.Following>
+
+<link href="@Url.Content("~/Content/HomePage.css")" rel="stylesheet" type="text/css" />
+
+<body>
+    <button class="btn btn-primary" data-target="#followingsModal" data-toggle="modal">@ViewBag.followingCount Following</button>
+    <div class="modal" id="followingsModal" tabindex="-1" >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Following</h4>
+                    <button class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+
+                        @if (Model != null)
+                        {
+
+                            foreach (var item in Model)
+                            {
+
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.User_Followed_First_Name)
+                                        @Html.DisplayFor(modelItem => item.User_Followed_Last_Name)
+                                    </td>
+                                    <td>
+                                        Following
+
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+</body>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
+
+<script>
+
+    // Get the modal
+    var modal = document.getElementById("followingsModal"); // Create Memory Modal
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn"); // Create Memory Modal
+    // Get the <span> element that closes the modal
+    var span = document.getElementById("createMemoryClose");
+    // When the user clicks the button, open the modal
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>

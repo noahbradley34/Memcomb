@@ -23,6 +23,11 @@ namespace Memcomb
 				url: "{controller}/{action}/{id}",
 				defaults: new { controller = "Profile", action = "Index", id = UrlParameter.Optional}
 			);
+			routes.MapRoute(
+				name: "Followings",
+				url: "{controller}/{action}/{email}/",
+				defaults: new { controller = "Followings", action = "Index", id = UrlParameter.Optional }
+			);
 		}
 	}
 }

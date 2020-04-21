@@ -129,6 +129,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\FollowingsController.cs" />
     <Compile Include="Controllers\LogInPageController.cs" />
     <Compile Include="Controllers\HomePageController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
@@ -277,10 +278,18 @@
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\SignUpPage\Index.cshtml" />
     <Content Include="Views\Settings\Index.cshtml" />
+    <Content Include="Views\Followings\Create.cshtml" />
+    <Content Include="Views\Followings\Delete.cshtml" />
+    <Content Include="Views\Followings\Details.cshtml" />
+    <Content Include="Views\Followings\Edit.cshtml" />
+    <Content Include="Views\Followings\Index.cshtml" />
+    <Content Include="Views\HomePage\View.cshtml" />
+    <Content Include="Views\Profile\_FollowingPartial.cshtml" />
     <Content Include="Views\HomePage\_CreateMemory.cshtml" />
     <Content Include="Views\HomePage\EditorTemplates\Memory.cshtml" />
     <Content Include="Views\HomePage\EditorTemplates\Fragment.cshtml" />
     <Content Include="Views\HomePage\DisplayTemplates\Fragment.cshtml" />
+    <Content Include="Views\Profile\_FollowerPartial.cshtml" />
     <Content Include="Views\Profile\_post_profile.cshtml" />
     <Content Include="Views\Profile\_post_background.cshtml" />
     <Content Include="Views\Profile\_post_bio.cshtml" />

@@ -1,7 +1,8 @@
-﻿@{
+﻿@model Memcomb.Models.User
+@{
     ViewBag.Title = "Profile";
 }
-@model Memcomb.Models.User
+
 @{	var resprofile = "";
     var setprofileImage = "";
     var resbackground = "";
@@ -13,7 +14,7 @@
     }
     if (Html.DisplayNameFor(model => model.Background_Pic) != null)
     {
-		resbackground = Model.Background_Pic.Replace(@"~", ""); //Need to set this to work for server
+        resbackground = Model.Background_Pic.Replace(@"~", ""); //Need to set this to work for server
         setbackgroundImage = resbackground.Replace(@"\", "/");
     }
 }
@@ -57,7 +58,7 @@
 								 border-radius: 100px;" />
 						</button>
 					</div>
-				}
+                }
 			</div>
 			<br />
 		<h1>
@@ -78,45 +79,60 @@
 			}
 			</div>
 		</div>
-		<div class="followerRow" style="margin-left: 35%; margin-right: 35%;">
-			<table style="color: darkorange;">
-				<tr>
-					<td>
-						| 100 following
-					</td>
-					<td>
-						&nbsp;&nbsp;|&nbsp;&nbsp;
-					</td>
-					<td>
-						100 followers
-					</td>
-					<td>
-						&nbsp;&nbsp;|&nbsp;&nbsp;
-					</td>
-					<td>
-						20 Memories |
-					</td>
-				</tr>
-			</table>
-		</div>
 	</div>
+
+	
 </head>
-<div class="navbar navbar-inverse navbar-fixed-top">
-	<div class="container">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			@Html.ActionLink("Memcomb", "Index", "LogInPage", new { area = "" }, new { @class = "navbar-brand" })
-		</div>
-		<div class="navbar-collapse collapse">
-			<ul class="nav navbar-nav">
-				<li>@Html.ActionLink("Home", "Index", "HomePage")</li>
-				<li>@Html.ActionLink("Profile", "Index", "Profile")</li>
-				<li>@Html.ActionLink("Settings", "Index", "Settings")</li>
-			</ul>
+
+<body>
+	<div class="followerRow">
+		<table style="color: darkorange; margin-left: 90px">
+			<tr>
+				<td>
+					|
+					@{
+
+                        Html.RenderPartial("_FollowingPartial", Model.Followings);
+					}
+
+				</td>
+				<td>
+					&nbsp;&nbsp;|&nbsp;&nbsp;
+				</td>
+				<td>
+					X Followers
+					
+
+				</td>
+				<td>
+					&nbsp;&nbsp;|&nbsp;&nbsp;
+				</td>
+				<td>
+					@ViewBag.memoryCount Memories Posted |
+				</td>
+			</tr>
+		</table>
+	</div>
+</body>
+	<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				@Html.ActionLink("Memcomb", "Index", "LogInPage", new { area = "" }, new { @class = "navbar-brand" })
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li>@Html.ActionLink("Home", "Index", "HomePage")</li>
+					<li>@Html.ActionLink("Profile", "Index", "Profile")</li>
+					<li>@Html.ActionLink("Settings", "Index", "Settings")</li>
+				</ul>
+			</div>
 		</div>
 	</div>
-</div>

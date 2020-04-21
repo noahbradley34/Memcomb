@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.IO;
@@ -13,6 +16,9 @@ namespace Memcomb.Controllers
         // GET: Profile
         public ActionResult Index()
         {
+            List<Following> followingList = new List<Following>();
+            var followingCount = 0;
+               
             User user = new User();
             using (memcombdbEntities dc = new memcombdbEntities())
             {
@@ -20,10 +26,13 @@ namespace Memcomb.Controllers
                 {
                     var cookie = HttpContext.Request.Cookies.Get("userIDCookie");
                     var v = dc.Users.Where(a => a.Email_ID == cookie.Value);
+                    var data = dc.Followings.Where(f => f.User.Email_ID == cookie.Value);
+                    
                     foreach (var u in v)
                     {
                         user.First_Name = u.First_Name;
                         user.Last_Name = u.Last_Name;
+                        user.Memories = u.Memories;
                         if (u.Profile_Picture != null)
                         {
                             var temp = u.Profile_Picture.Replace(@"C:\Users\17347\Desktop\Capstone Project\Github\MemcombRepo\Memcomb", "~");
@@ -48,6 +57,25 @@ namespace Memcomb.Controllers
                         }
                         user.Memories = u.Memories;
                     }
+
+                    foreach (var item in data)
+                    {
+                        followingCount = followingCount + 1;
+                        var followed_user_id = dc.Users.Where(b => b.User_ID == item.User_Followed).FirstOrDefault();
+                        followingList.Add(new Following
+                        {
+                            User_Followed = item.User_Followed,
+                            User_Following = item.User_Following,
+                            User_Followed_First_Name = followed_user_id.First_Name,
+                            User_Followed_Last_Name = followed_user_id.Last_Name,
+                            User = user,
+                        });
+                        
+                    }
+                    ViewBag.followingCount = followingCount;
+                    ViewBag.memoryCount = user.Memories.Count;
+                    
+                    user.Followings = followingList;
                 }
             }
             //ProfilePageModel profiler = new ProfilePageModel();
@@ -203,9 +231,54 @@ namespace Memcomb.Controllers
         // GET: Profile/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            using (memcombdbEntities db = new memcombdbEntities())
+            {
+                if (HttpContext.Request.Cookies["userIDCookie"] != null)
+                {
+                    HttpCookie cookie = HttpContext.Request.Cookies.Get("userIDCookie");
+                    var v = db.Users.Where(a => a.Email_ID == cookie.Value).FirstOrDefault();
+                    //id = v.Email_ID;
+
+                    //var data = db.Followings.Include(f => f.User).Where(f => f.User.Email_ID == id);
+
+                   // var followed_user = db.Followings.Where(a => a.User_Followed == v.User_ID).FirstOrDefault();
+
+                   // var get_UserID = db.Followings.Where(a => a.User_Followed == v.User_ID).FirstOrDefault();
+
+
+                    var first_name = "default f_name";
+
+                    var last_name = "default l_name";
+
+                    /*var new_following = new Following()
+                    {
+                        User_Following = get_UserID.User_Following,
+                        User_Followed = get_UserID.User_Followed,
+                        User_Followed_First_Name = first_name,
+                        User_Followed_Last_Name = last_name
+                    };
+
+                    var user_following_join = db.Users.Join(db.Followings,
+                        x => x.User_ID,
+                        y => y.User_Followed,
+                        (x, y) => new {
+                            User_First_Name = x.First_Name,
+                            User_Last_Name = x.Last_Name
+                        }); */
+
+                    return View();
+                }
+                else
+                {
+                    var followings = db.Followings.Include(f => f.User);
+
+                    return View(followings.ToList());
+                }
+            }
+            
+            //return View();
         }
-        [HttpPost]
+
         // GET: Profile/Create
         public ActionResult Create()
         {

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Memcomb.Models.Following>
+
+<link href="@Url.Content("~/Content/HomePage.css")" rel="stylesheet" type="text/css" />
+
+<body>
+
+    <button id="myBtn1" class="btn" data-toggle="modal" data-target="#myModal1">Followers</button>
+
+    <!-- The Modal -->
+    <div id="myModal1" class="modal fade">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+
+           
+                
+            asdfasdf
+                
+
+
+               
+
+
+            
+        </div>
+    </div>
+
+</body>
+
+<script>
+
+    // Get the modal
+    var modal = document.getElementById("myModal1"); // Create Memory Modal
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn1"); // Create Memory Modal
+    // Get the <span> element that closes the modal
+    var span = document.getElementById("createMemoryClose");
+    // When the user clicks the button, open the modal
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
